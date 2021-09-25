@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WebcamImage } from 'ngx-webcam';
 import { ApiService } from './services/api.service';
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,22 +11,16 @@ import { ApiService } from './services/api.service';
 export class AppComponent implements OnInit {
 
   handleImage(webcamImage: any) {
-    console.log(webcamImage._imageAsDataUrl)
   }
 
 
-  constructor(public api: ApiService) {
+  constructor(public api: ApiService, public http: HttpClient) {
 
   }
   title = 'junkPickup';
   ngOnInit() {
-    this.api.getData("http://localhost:8081/")
-
+ 
   }
 
-}
-
-
-
-
+ }
 

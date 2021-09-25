@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   }
 
   submit(data:string){
-  this.apiService.postData(this.usersData)
+  this.apiService.postData('',this.usersData)
     console.log(this.usersData);
 
   }
