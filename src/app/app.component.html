@@ -2,5 +2,12 @@
 <nav>
   <li><a routerLink="/login">LogIn</a></li><br>
   <li><a routerLink="/sign-up">Sign-Up</a></li><br>
+  <li><a routerLink="/trash-upload">trash-upload</a></li><br>
 </nav>
-<router-outlet></router-outlet>  
+<router-outlet></router-outlet> 
+<app-trash-upload (getPicture)="handleImage($event)"></app-trash-upload>
+
+<!-- <div class="webcam-image" *ngIf="webcamImage">
+  <img [src]="webcamImage.imageAsDataUrl" />
+</div>  -->
+ 

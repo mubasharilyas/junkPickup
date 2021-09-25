@@ -11,5 +11,37 @@ export class SignUpComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  data = {
+    userName: '',
+    email: '',
+    address: '',
+    password: '',
+    confirmPassword: '',
+  }
+  isPasswordMatch = true
+
+
+  public onSubmit() {
+    console.log('data', this.data)
+    {
+      if ((this.data.password == this.data.confirmPassword)) {
+        this.isPasswordMatch = true;
+      }
+      else {
+        this.isPasswordMatch = false;
+
+      }
+    }
+  }
+  passwordType = "password"
+  passwordClass = "fas fa-eye"
+
+  public onShow() {
+
+    this.passwordType = this.passwordType == "text" ? "password" : "text"
+    this.passwordClass = this.passwordClass == "fa fa-eye-slash" ? "fas fa-eye" : "fa fa-eye-slash"
+
+  }
+
 
 }

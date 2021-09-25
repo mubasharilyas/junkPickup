@@ -1,0 +1,42 @@
+.container{
+    background-image:url("../../../assets/picture.jpg");
+    width:100%;
+    height:500px;
+    // margin-left:330px;
+    color: white;
+    margin: auto;
+
+}
+.box{
+     width:220px;
+     height: 23px;
+    margin: auto;
+    border-radius: 15px;
+    outline: none;
+
+
+
+}
+.sign{
+text-align: center;
+    color: red; 
+}
+
+.btn{
+    margin-left: 80px;
+    width: 80px;
+    height: 30px;
+    border-radius: 15px;
+    background-color: red;
+    color: white;
+}
+.btn:hover{
+    background-color: wheat;
+    color:black
+}
+.message{
+color: red;
+margin-top:0px ;
+margin-bottom: 5px;
+    
+}

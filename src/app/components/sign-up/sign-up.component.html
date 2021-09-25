@@ -1,1 +1,19 @@
-<p>sign-up works!</p>
+<div class="container" >
+    <h1 class="sign">sign up</h1>
+    <div class="box" >
+        Username<br>
+        <input [(ngModel)]="data.userName" type="text" placeholder="username" class="box"><br><br>
+        Email<br>
+        <input [(ngModel)]="data.email" type="email" placeholder="Email" class="box"><br><br>
+        Address<br>
+        <input [(ngModel)]="data.address" type="text" placeholder="Address" class="box"><br><br>
+        Password<br>
+        <input [(ngModel)]="data.password" [type]="passwordType" placeholder="password" class="box" ><i [class]="passwordClass" (click)="onShow()"></i><br><br>
+        Confirm password<br>
+        <input [(ngModel)]="data.confirmPassword" [type]="passwordType" placeholder="confirm password" class="box"><br><br>
+        <div class="message" *ngIf="!isPasswordMatch" >Password does not match</div>
+        <button  class="btn" style="outline: none;" (click)='onSubmit()'>Submit</button>
+    </div>
+</div>
+
+
