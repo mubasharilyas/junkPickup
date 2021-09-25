@@ -7,7 +7,7 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { TrashUploadComponent } from './trash-upload/trash-upload.component';
+import { TrashUploadComponent } from './components/trash-upload/trash-upload.component';
 import { WebcamModule } from 'ngx-webcam';
 
 
