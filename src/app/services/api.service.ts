@@ -16,11 +16,25 @@ export class ApiService {
       console.log(data);
     })
   }
-  posData(){
-    this.http.post<any>('https://reqres.in/api/posts', { title: 'Angular POST Request Example' }).subscribe(data => {
+  postData(receive:any){
+    this.http.post<any>('https://reqres.in/api/posts',receive ).subscribe(data => {
       this.postId = data.id;
-    })  }
+    }) 
+   }
+   sendData(save:any){
+    this.http.post<any>('https://reqres.in/api/posts',save ).subscribe(data => {
+      this.postId = data.id;
+    }) 
+   }
+   submit(imageSrc:any){
+    this.http.post('http://localhost/phpapi/imageupload.php',imageSrc)
+      .subscribe(res => {
+        console.log(res);
+        alert('Uploaded Successfully.');
+      })
+
+  
 
 }  
 
-
+}
