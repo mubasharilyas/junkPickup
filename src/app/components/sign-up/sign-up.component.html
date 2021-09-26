@@ -1,18 +1,23 @@
-<div class="container" >
+<div class="container"style="width:50%;height: 70%;">
     <h1 class="sign">sign up</h1>
-    <div class="box" >
-        Username<br>
-        <input [(ngModel)]="data.userName" type="text" placeholder="username" class="box"><br><br>
+    <div class="box" style="width:40%;margin: auto;">
+        customerName<br>
+        <input [(ngModel)]="data.customerName" type="text" placeholder="customername" class="box1"><br><br>
         Email<br>
-        <input [(ngModel)]="data.email" type="email" placeholder="Email" class="box"><br><br>
+        <input [(ngModel)]="data.email" type="email" placeholder="Email" class="box2"><br><br>
+        Contact Number<br>
+        <input [(ngModel)]="data.contactNumber" type="" placeholder="Contact Number" class="box3"><br><br>
         Address<br>
-        <input [(ngModel)]="data.address" type="text" placeholder="Address" class="box"><br><br>
+        <input [(ngModel)]="data.address" type="text" placeholder="Address" class="box4"><br><br>
         Password<br>
-        <input [(ngModel)]="data.password" [type]="passwordType" placeholder="password" class="box" ><i [class]="passwordClass" (click)="onShow()"></i><br><br>
+    
+        <input [(ngModel)]="data.password" [type]="passwordType" placeholder="password"  [class]="passwordClass"  (click)="onShow()" class="box5"> 
+        <i [class]="passwordClass"  (click)="onShow()"></i><br><br>
+    
         Confirm password<br>
-        <input [(ngModel)]="data.confirmPassword" [type]="passwordType" placeholder="confirm password" class="box"><br><br>
+        <input [(ngModel)]="data.confirmPassword" [type]="passwordType" placeholder="confirm password" class="box6"><br><br>
         <div class="message" *ngIf="!isPasswordMatch" >Password does not match</div>
-        <button  class="btn" style="outline: none;" (click)='onSubmit()'>Submit</button>
+        <button  class="btn" style="margin-left: 19%;" (click)='onSubmit()'>Submit</button>
     </div>
 </div>
 

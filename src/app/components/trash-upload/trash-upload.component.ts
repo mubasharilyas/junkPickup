@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild, AfterViewInit } from '@angular/core';
 import { WebcamImage, WebcamInitError, WebcamUtil } from 'ngx-webcam';
 import { Observable, Subject } from 'rxjs';
 import { ApiService } from '../../services/api.service';
@@ -8,7 +8,8 @@ import { ApiService } from '../../services/api.service';
   templateUrl: './trash-upload.component.html',
   styleUrls: ['./trash-upload.component.scss']
 })
-export class TrashUploadComponent implements OnInit {
+export class TrashUploadComponent implements OnInit, AfterViewInit {
+  @ViewChild('upload') input: any;
 
   @Output() getPicture = new EventEmitter<WebcamImage>();
   showWebcam = false;
@@ -23,12 +24,42 @@ export class TrashUploadComponent implements OnInit {
   constructor(public api: ApiService) {
 
   }
-
+  ngAfterViewInit(): void {
+    console.log(this.input.nativeElement);
+    let button = document.getElementById('upload');
+    console.log(button)
+   
+  }
   ngOnInit(): void {
     WebcamUtil.getAvailableVideoInputs()
       .then((mediaDevices: MediaDeviceInfo[]) => {
         this.isCameraExist = mediaDevices && mediaDevices.length > 0;
       });
+
+    // this.uploadImage()
+  }
+  uploadImage() {
+    let button = document.getElementById('#upload');
+    console.log(button)
+    // var images = $('.images')
+
+    // button.on('click', function () {
+    //   uploader.click()
+    // })
+
+    // uploader.on('change', function () {
+    //   var reader = new FileReader()
+    //   reader.onload = function (event) {
+    //     images.prepend('<div class="img" style="background-image: url(\'' + event.target.result + '\');" rel="' + event.target.result + '"><span>remove</span></div>')
+    //   }
+    //   reader.readAsDataURL(uploader[0].files[0])
+
+    // })
+
+    // images.on('click', '.img', function () {
+    //   $(this).remove()
+    // })
+
   }
 
   takeSnapshot(): void {

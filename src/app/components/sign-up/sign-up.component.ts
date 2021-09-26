@@ -12,8 +12,9 @@ export class SignUpComponent implements OnInit {
   ngOnInit(): void {
   }
   data = {
-    userName: '',
+    customerName: '',
     email: '',
+    contactNumber:'',
     address: '',
     password: '',
     confirmPassword: '',

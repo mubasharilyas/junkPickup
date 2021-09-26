@@ -1,0 +1,59 @@
+<head>
+    <meta charset="utf-8">
+    <title>Responsive Navigation Menu</title>
+    <link rel="stylesheet" href="N.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://fonts.googleapis.com/css?family=Lato:100,200,300,400,500,600,700' rel='stylesheet'
+      type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script>
+      (function ($) {
+        $(document).ready(function () {
+          uploadImage()
+          function uploadImage() {
+            console.log($('#upload'))
+            var button = $('#upload')
+            var uploader = $('<input type="file" accept="image/*" />')
+            var images = $('.images')
+  
+            button.on('click', function () {
+              uploader.click()
+            })
+  
+            uploader.on('change', function () {
+              var reader = new FileReader()
+              reader.onload = function (event) {
+                images.prepend('<div class="img" style="background-image: url(\'' + event.target.result + '\');" rel="' + event.target.result + '"><span>remove</span></div>')
+              }
+              reader.readAsDataURL(uploader[0].files[0])
+  
+            })
+  
+            images.on('click', '.img', function () {
+              $(this).remove()
+            })
+  
+          }
+        })
+      })(jQuery)
+    </script>
+    <!-- f="http:/<a hre/scribblerockerz.com/drag-n-drop-file-input-without-javascript/" class="back-to-article" target="_blank">back to Article</a> -->
+  </head>
+  
+  <body >
+    
+    <div class="notification"></div>
+   
+  
+  
+  
+  
+  
+  
+    <link href='https://fonts.googleapis.com/css?family=Lato:100,200,300,400,500,600,700' rel='stylesheet'
+      type='text/css'>
+  
+    <!-- rf a href="http://scribblerockerz.com/drag-n-drop-file-input-without-javascript/" class="back-to-article" target="_blank">back to Article</a> -->
+    -->
+  </body>
