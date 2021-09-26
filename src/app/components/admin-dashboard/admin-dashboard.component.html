@@ -2,7 +2,7 @@
 
 <div style="overflow-x: auto;">
     <table>
-        <tr>
+        <tr >
 
             <th style="width: 12%;">Picture</th>
             <th style="width: 12%;">Customer</th>
@@ -11,10 +11,10 @@
             <th style="width: 12%;">Price</th>
             <th style="width: 12%;">Status</th>
             <Th style="width: 12%">Action</Th>
-
+            
 
         </tr>
-        <tr *ngFor="let item of details">
+        <tr *ngFor="let item of details | paginate: { itemsPerPage: 10, currentPage: p }">
             <td><img src="picture.jpG" style="height: 30px; width:30px"></td>
             <td>{{item.customer}}</td>
             <td>{{item.catagory}}</td>
@@ -29,3 +29,8 @@
 
     </table>
 </div>
+
+
+
+  <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+ 
