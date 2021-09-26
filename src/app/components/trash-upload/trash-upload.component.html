@@ -1,14 +1,80 @@
-<div><i class="fas fa-camera"></i></div>
 <div *ngIf="isCameraExist; else noCameraExist">
-    <div style="text-align:center">
-        <div class="btn-group">
-            <button *ngIf="showWebcam" class="button" (click)="takeSnapshot()">Capture</button>
-            <button class="button" (click)="onOffWebCame()">Take Picture</button>
-        </div> <br />
-        <webcam [height]="500" [width]="1000" [trigger]="triggerObservable" (imageCapture)="handleImage($event)"
-            *ngIf="showWebcam" [switchCamera]="nextWebcamObservable"></webcam>
-    </div>
+    <!-- <div class="wrapper" *ngIf="showWebcam">
+        <div class="btn">
+            <button class="button" (click)="takeSnapshot()">capture</button>
+            <button (click)="goBack()">Back</button>
+        </div>
 
+
+
+        
+    </div> -->
+    <div class="wrapper" *ngIf="!showWebcam">
+        <header>
+            <h1>Create</h1>
+        </header>
+
+        <div class="ways">
+            <ul>
+                <li #upload id="upload">
+                    Select Image
+                </li>
+                <li>
+                    Take Photo
+                </li>
+            </ul>
+        </div>
+
+        <div class="sections">
+
+            <section class="active">
+                <input type="text" placeholder="Title" id="title" />
+                <select class="category">
+                    <option value="summmer">summer</option>
+                    <option value="winter">winter</option>
+                    <option value="working">working</option>
+                    <option value="road">road</option>
+                </select>
+
+            </section>
+
+            <section>
+                <input type="text" placeholder="Topic" id="topic" />
+                <textarea placeholder="something..." id="msg"></textarea>
+            </section>
+
+        </div>
+
+        <footer>
+            <ul>
+                <!-- <li><span id="reset">reset</span></li> -->
+                <!-- <li><span id="send">send</span></li> -->
+
+                <button style="margin-left: 35%">Submit</button>
+            </ul>
+        </footer>
+
+    </div>
+    <!-- <div *ngIf="!showWebcam">
+        <button class="button" (click)="onOffWebCame()">Take Picture <i class="fas fa-camera"></i></button><br />
+        <input type="file" id="FUImage" name="FUImage" accept=".png, .jpg, .jpeg" (change)="handleFileInput($event)">
+        <br />
+        <button type="button" class="btn btn-danger pull-left" (click)="btnUpload()">Upload</button><br />
+        <input type="text" [(ngModel)]="upload.categry"> categry<br />
+        <input type="text" [(ngModel)]="upload.numberOfItem">items<br />
+
+    </div> -->
+    <div class="camera-on" *ngIf="showWebcam">
+        <div style="width: 100%; margin: auto;">
+            <webcam [width]="1000" [trigger]="triggerObservable" (imageCapture)="handleImage($event)"
+                [switchCamera]="nextWebcamObservable"></webcam>
+        </div>
+        <div class="btn">
+            <button>capture</button>
+            <button>Back</button>
+        </div>
+
+    </div>
     <div *ngIf="errors.length > 0">
         <h4>Error Messages:</h4>
         <ul *ngFor="let error of errors">
@@ -17,7 +83,7 @@
     </div>
 </div>
 
+
 <ng-template #noCameraExist>
     Camera device not available
 </ng-template>
-

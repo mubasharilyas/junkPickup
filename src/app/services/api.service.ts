@@ -15,28 +15,29 @@ export class ApiService {
       this.displayVal = data;
       console.log(data)
       return data;
+
+    })
+
+  }
+  postData(url: any, data: any) {
+    this.http.post<any>(url, data).subscribe(data => {
+      console.log(data)
     })
   }
-
-  postData(receive:any){
-    this.http.post<any>('https://reqres.in/api/posts',receive ).subscribe(data => {
+  sendData(save: any) {
+    this.http.post<any>('https://reqres.in/api/posts', save).subscribe(data => {
       this.postId = data.id;
-    }) 
-   }
-   sendData(save:any){
-    this.http.post<any>('https://reqres.in/api/posts',save ).subscribe(data => {
-      this.postId = data.id;
-    }) 
-   }
-   submit(imageSrc:any){
-    this.http.post('http://localhost/phpapi/imageupload.php',imageSrc)
+    })
+  }
+  submit(imageSrc: any) {
+    this.http.post('http://localhost/phpapi/imageupload.php', imageSrc)
       .subscribe(res => {
         console.log(res);
         alert('Uploaded Successfully.');
       })
 
-  
 
-}  
+
+  }
 
 }
