@@ -15,7 +15,8 @@ export class TrashUploadComponent implements OnInit, AfterViewInit {
   showWebcam = false;
   isCameraExist = true;
   ImageBaseData: any;
-
+  uploader: any;
+  button: any;
   errors: WebcamInitError[] = [];
 
   private trigger: Subject<void> = new Subject<void>();
@@ -25,9 +26,32 @@ export class TrashUploadComponent implements OnInit, AfterViewInit {
 
   }
   ngAfterViewInit(): void {
-    console.log(this.input.nativeElement);
-    let button = document.getElementById('upload');
-    console.log(button)
+
+    this.button = document.getElementById('upload');
+    this.uploader = document.createElement('input');
+    this.uploader.setAttribute("type", "file");
+    this.uploader.setAttribute("accept", "image/*");
+
+  }
+  clickUpload() {
+    this.uploader.click()
+    let me = this
+    this.uploader.addEventListener("change", function () {
+      var reader = new FileReader()
+      reader.readAsDataURL(me.uploader.files[0])
+      reader.onload = function () {
+        console.log(reader.result);
+
+        me.ImageBaseData = reader.result;
+        me.upload.image = me.ImageBaseData
+      };
+      reader.onerror = function (error) {
+        console.log('Error: ', error);
+      };
+
+
+    })
+
    
   }
   ngOnInit(): void {
@@ -36,31 +60,9 @@ export class TrashUploadComponent implements OnInit, AfterViewInit {
         this.isCameraExist = mediaDevices && mediaDevices.length > 0;
       });
 
-    // this.uploadImage()
+  
   }
-  uploadImage() {
-    let button = document.getElementById('#upload');
-    console.log(button)
-    // var images = $('.images')
 
-    // button.on('click', function () {
-    //   uploader.click()
-    // })
-
-    // uploader.on('change', function () {
-    //   var reader = new FileReader()
-    //   reader.onload = function (event) {
-    //     images.prepend('<div class="img" style="background-image: url(\'' + event.target.result + '\');" rel="' + event.target.result + '"><span>remove</span></div>')
-    //   }
-    //   reader.readAsDataURL(uploader[0].files[0])
-
-    // })
-
-    // images.on('click', '.img', function () {
-    //   $(this).remove()
-    // })
-
-  }
 
   takeSnapshot(): void {
     this.trigger.next();
