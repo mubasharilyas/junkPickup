@@ -115,7 +115,7 @@ export class TrashUploadComponent implements OnInit, AfterViewInit {
     return this.nextWebcam.asObservable();
   }
   upload = {
-    image: "", categry: "", numberOfItem: ""
+    image: "", category: "", numberOfItem: ""
   }
 
 
