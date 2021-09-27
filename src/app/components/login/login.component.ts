@@ -23,6 +23,10 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
 
 
+  submit(data:string){
+  this.apiService.postData('',this.usersData)
+    console.log(this.usersData);
+
   }
   
     

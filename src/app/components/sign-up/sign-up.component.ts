@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { ApiService } from '../../services/api.service'
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -7,13 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignUpComponent implements OnInit {
 
-  constructor() { }
+  constructor(public api: ApiService) { }
 
   ngOnInit(): void {
   }
   data = {
     userName: '',
     email: '',
+    contactNumber: '',
     address: '',
     password: '',
     confirmPassword: '',
@@ -26,6 +27,7 @@ export class SignUpComponent implements OnInit {
     {
       if ((this.data.password == this.data.confirmPassword)) {
         this.isPasswordMatch = true;
+        this.api.postData('http://localhost:8081/api/v1/signUp', this.data)
       }
       else {
         this.isPasswordMatch = false;
