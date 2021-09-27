@@ -36,8 +36,16 @@ export class ApiService {
         alert('Uploaded Successfully.');
       })
 
+    }
+    public updateJunk(postData: any) {
+      let endPoints = "/posts/1"
+      this.http.put(
+        endPoints, postData).subscribe(data => {
+        console.log(data);
+      });
+    }
 
 
-  }
+
 
 }

@@ -4,14 +4,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
-
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { TrashUploadComponent } from './components/trash-upload/trash-upload.component';
 import { WebcamModule } from 'ngx-webcam';
-
-
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component'
+import { NgxPaginationModule } from 'ngx-pagination';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +25,10 @@ import { AdminDashboardComponent } from './components/admin-dashboard/admin-dash
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    WebcamModule
+    WebcamModule,
+ NgxPaginationModule,
+ ReactiveFormsModule 
+
 
   ],
   providers: [],

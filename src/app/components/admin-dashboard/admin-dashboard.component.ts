@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControlDirective } from '@angular/forms';
-import {ApiService} from '../../services/api.service';
+import { ApiService } from '../../services/api.service';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -8,31 +9,42 @@ import {ApiService} from '../../services/api.service';
   styleUrls: ['./admin-dashboard.component.scss']
 })
 export class AdminDashboardComponent implements OnInit {
+  collection: any;
+  p: number = 1;
 
-  constructor() { }
+  constructor() {
+  }
+  public details = [
+    {
+      customer: 'Mubashar ilyas',
+      address: 'burewala',
+      picture: 'abc',
+      catagory: 'lk',
+      status: 'asdsd',
+      price: '350'
+    }
 
- public details=[
-    {customer:'Mubashar ilyas',
-    email:'emaill',
-    address:'burewala',
-    picture:'abc',
-    catagory:'lk',
-    status:'asdsd',
-    price:'350'}
-    
   ]
-  status=['inprogress','Completed','contacted the user','need to contact customer price', 'approved']
-
-  saveData(item:any){
+  status = ['inprogress', 'Completed', 'contacted the user', 'need to contact customer price', 'approved']
+  onPageChange(event: any) {
+    this.p = event
+  }
+  saveData(item: any) {
     console.log(item)
   }
-  
-  
+
+
 
 
 
 
   ngOnInit(): void {
+    this.getAllData();
+  }
+
+  getAllData() {
+
   }
 }
+
 
