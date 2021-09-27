@@ -56,7 +56,7 @@ export class TrashUploadComponent implements OnInit, AfterViewInit {
   }
   ngOnInit(): void {
     WebcamUtil.getAvailableVideoInputs()
-      .then((mediaDevices: MediaDeviceInfo[]) => {
+      .then((mediaDevices: MediaDeviceInfo[]) => { 
         this.isCameraExist = mediaDevices && mediaDevices.length > 0;
       });
 
@@ -64,7 +64,7 @@ export class TrashUploadComponent implements OnInit, AfterViewInit {
   }
 
 
-  takeSnapshot(): void {
+  takeSnapshot(): void { 
     this.trigger.next();
     this.showWebcam = false;
   }

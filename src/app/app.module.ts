@@ -11,6 +11,8 @@ import { WebcamModule } from 'ngx-webcam';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component'
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CameraComponent } from './camera/camera.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +20,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     SignUpComponent,
     TrashUploadComponent,
 
-    AdminDashboardComponent
+    AdminDashboardComponent,
+      CameraComponent
   ],
   imports: [
     BrowserModule,

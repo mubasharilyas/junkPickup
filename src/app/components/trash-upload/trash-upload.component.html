@@ -2,7 +2,7 @@
     <!-- <div class="wrapper" *ngIf="showWebcam">
         <div class="btn">
             <button class="button" (click)="takeSnapshot()">capture</button>
-            <button (click)="goBack()">Back</button>
+            <button >Back</button>
         </div>
 
 
@@ -19,7 +19,7 @@
                 <li #upload id="upload" (click)="clickUpload()">
                     Select Image
                 </li>
-                <li>
+                <li (click)="onOffWebCame()">
                     Take Photo
                 </li>
             </ul>
@@ -28,20 +28,18 @@
         <div class="sections">
 
             <section class="active">
-                <input type="text" placeholder="Title" id="title" />
+                <input type="text" placeholder="numberOfItem" id="title" />
                 <select class="category">
-                    <option value="summmer">summer</option>
-                    <option value="winter">winter</option>
-                    <option value="working">working</option>
-                    <option value="road">road</option>
+                    <option value="sofa">Sofa</option>
+                    <option value="printer">Printer</option>
+                    <option value="dinningTable">Dinning Table</option>
+                    <option value="boiler">Boiler</option>
+                    <option value="tv">Tv</option>
                 </select>
 
             </section>
 
-            <section>
-                <input type="text" placeholder="Topic" id="topic" />
-                <textarea placeholder="something..." id="msg"></textarea>
-            </section>
+
 
         </div>
 
@@ -55,7 +53,7 @@
         </footer>
 
     </div>
-    <!-- <div *ngIf="!showWebcam">
+    <!-- <div *ngIf="showWebcam">
         <button class="button" (click)="onOffWebCame()">Take Picture <i class="fas fa-camera"></i></button><br />
         <input type="file" id="FUImage" name="FUImage" accept=".png, .jpg, .jpeg" (change)="handleFileInput($event)">
         <br />
@@ -66,12 +64,12 @@
     </div> -->
     <div class="camera-on" *ngIf="showWebcam">
         <div style="width: 100%; margin: auto;">
-            <webcam [width]="1000" [trigger]="triggerObservable" (imageCapture)="handleImage($event)"
-                [switchCamera]="nextWebcamObservable"></webcam>
+            <app-camera (pictureTaken)="handleImage($event)"></app-camera>
+
         </div>
         <div class="btn">
-            <button>capture</button>
-            <button>Back</button>
+            <!-- <button>capture</button> -->
+            <button (click)="goBack()" >Back</button>
         </div>
 
     </div>

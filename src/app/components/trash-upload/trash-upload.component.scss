@@ -27,7 +27,7 @@
     padding: 5px 8px;
     outline: none;
     white-space: nowrap;
-    -webkit-user-select: none;
+    // -webkit-user-select: none;
     cursor: pointer;
     text-shadow: 1px 1px #fff;
     font-weight: 700;
@@ -104,7 +104,7 @@
   border-radius: 5px;
   width: 360px;
   max-width: 100%;
-  margin: 50px auto;
+  // margin: 50px auto;
   align-self: center;
   box-sizing: border-box;
 }
@@ -672,7 +672,7 @@ section textarea {
   cursor: pointer;
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 100%) {
   .wrapper {
     margin-top: 0;
   }
