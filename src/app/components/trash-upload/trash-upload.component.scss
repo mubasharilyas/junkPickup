@@ -1,4 +1,11 @@
-.button {
+.body {
+  background-color: #363940;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  position: relative;
+} 
+ .button {
     color: white;
     background-color: blue;
     padding: 4px;

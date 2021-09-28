@@ -1,14 +1,6 @@
-<div *ngIf="isCameraExist; else noCameraExist">
-    <!-- <div class="wrapper" *ngIf="showWebcam">
-        <div class="btn">
-            <button class="button" (click)="takeSnapshot()">capture</button>
-            <button >Back</button>
-        </div>
+<div class="body" >
+    
 
-
-
-        
-    </div> -->
     <div class="wrapper" *ngIf="!showWebcam">
         <header>
             <h1>Create</h1>
@@ -19,9 +11,7 @@
                 <li #upload id="upload" (click)="clickUpload()">
                     Select Image
                 </li>
-                <li (click)="onOffWebCame()">
-                    Take Photo
-                </li>
+                
             </ul>
         </div>
 
@@ -45,33 +35,20 @@
 
         <footer>
             <ul>
-                <!-- <li><span id="reset">reset</span></li> -->
-                <!-- <li><span id="send">send</span></li> -->
+               
 
                 <button style="margin-left: 35%">Submit</button>
             </ul>
         </footer>
 
     </div>
-    <!-- <div *ngIf="showWebcam">
-        <button class="button" (click)="onOffWebCame()">Take Picture <i class="fas fa-camera"></i></button><br />
-        <input type="file" id="FUImage" name="FUImage" accept=".png, .jpg, .jpeg" (change)="handleFileInput($event)">
-        <br />
-        <button type="button" class="btn btn-danger pull-left" (click)="btnUpload()">Upload</button><br />
-        <input type="text" [(ngModel)]="upload.category"> category<br />
-        <input type="text" [(ngModel)]="upload.numberOfItem">items<br />
-
-    </div> -->
+   
     <div class="camera-on" *ngIf="showWebcam">
-        <div style="width: 100%; margin: auto;">
-            <app-camera (pictureTaken)="handleImage($event)"></app-camera>
+        <div style="width:100%; margin: auto;">
+            <input type="file" accept="image/*" capture="camera">
 
         </div>
-        <div class="btn">
-            <!-- <button>capture</button> -->
-            <button (click)="goBack()" >Back</button>
-        </div>
-
+      
     </div>
     <div *ngIf="errors.length > 0">
         <h4>Error Messages:</h4>
@@ -82,6 +59,3 @@
 </div>
 
 
-<ng-template #noCameraExist>
-    Camera device not available
-</ng-template>
