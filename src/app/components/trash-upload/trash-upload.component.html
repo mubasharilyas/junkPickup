@@ -1,6 +1,7 @@
 <div class="body" >
     
 
+
     <div class="wrapper" *ngIf="!showWebcam">
         <header>
             <h1>Create</h1>
@@ -25,6 +26,7 @@
                     <option value="dinningTable">Dinning Table</option>
                     <option value="boiler">Boiler</option>
                     <option value="tv">Tv</option>
+
                 </select>
 
             </section>
@@ -37,7 +39,7 @@
             <ul>
                
 
-                <button style="margin-left: 35%">Submit</button>
+                <button style="margin-left: 35%" (click)="btnUpload()">Submit</button>
             </ul>
         </footer>
 
@@ -46,6 +48,7 @@
     <div class="camera-on" *ngIf="showWebcam">
         <div style="width:100%; margin: auto;">
             <input type="file" accept="image/*" capture="camera">
+
 
         </div>
       

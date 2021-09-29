@@ -4,6 +4,7 @@ import { ApiService } from '../../services/api.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { observable } from 'rxjs';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -30,7 +31,10 @@ export class LoginComponent implements OnInit {
 
   submit(data: any) {
     this.submitted = true;
-    // this.apiService.postData(this.usersData.v)
+    this.apiService.postData('http://localhost:8081/api/v1/login', this.usersData.value).subscribe(data => {
+      console.log(data)
+      localStorage.setItem('currentUser', data)
+    })
     if (this.usersData.invalid) {
       console.log('email required')
     }

@@ -14,6 +14,8 @@ export class AdminDashboardComponent implements OnInit {
 
   constructor() {
   }
+  
+  currrentUser:any={isAdmin:false}
   public details = [
     {
       customer: 'Mubashar ilyas',
@@ -30,6 +32,7 @@ export class AdminDashboardComponent implements OnInit {
     this.p = event
   }
   saveData(item: any) {
+    this.currrentUser=false;
     console.log(item)
   }
 
