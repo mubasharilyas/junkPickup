@@ -20,9 +20,7 @@ export class ApiService {
 
   }
   postData(url: any, data: any) {
-    this.http.post<any>(url, data).subscribe(data => {
-      console.log(data)
-    })
+    return this.http.post<any>(url, data)
   }
   sendData(save: any) {
     this.http.post<any>('https://reqres.in/api/posts', save).subscribe(data => {

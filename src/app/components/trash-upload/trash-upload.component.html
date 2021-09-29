@@ -1,9 +1,6 @@
 <div *ngIf="isCameraExist; else noCameraExist">
     <!-- <div class="wrapper" *ngIf="showWebcam">
-        <div class="btn">
-            <button class="button" (click)="takeSnapshot()">capture</button>
-            <button (click)="goBack()">Back</button>
-        </div>
+        
 
 
 
@@ -28,8 +25,8 @@
         <div class="sections">
 
             <section class="active">
-                <input type="text" placeholder="Title" id="title" />
-                <select class="category">
+                <input type="text"  placeholder="No Of Items" id="title" />
+                <select class="category" >
                     <option value="summmer">summer</option>
                     <option value="winter">winter</option>
                     <option value="working">working</option>
@@ -50,29 +47,32 @@
                 <!-- <li><span id="reset">reset</span></li> -->
                 <!-- <li><span id="send">send</span></li> -->
 
-                <button style="margin-left: 35%">Submit</button>
+                <button style="margin-left: 35%" (click)="btnUpload()">Submit</button>
             </ul>
         </footer>
 
     </div>
-    <!-- <div *ngIf="!showWebcam">
-        <button class="button" (click)="onOffWebCame()">Take Picture <i class="fas fa-camera"></i></button><br />
-        <input type="file" id="FUImage" name="FUImage" accept=".png, .jpg, .jpeg" (change)="handleFileInput($event)">
-        <br />
-        <button type="button" class="btn btn-danger pull-left" (click)="btnUpload()">Upload</button><br />
-        <input type="text" [(ngModel)]="upload.category"> category<br />
-        <input type="text" [(ngModel)]="upload.numberOfItem">items<br />
+    <!-- <div *ngIf=" !showWebcam">
+                    <button class="button" (click)="onOffWebCame()">Take Picture <i
+                            class="fas fa-camera"></i></button><br />
+                    <input type="file" id="FUImage" name="FUImage" accept=".png, .jpg, .jpeg"
+                        (change)="handleFileInput($event)">
+                    <br />
+                    <button type="button" class="btn btn-danger pull-left" (click)="btnUpload()">Upload</button><br />
+                    <input type="text" [(ngModel)]="upload.category"> category<br />
+                    <input type="text" [(ngModel)]="upload.numberOfItem">items<br />
 
     </div> -->
-    <div class="camera-on" *ngIf="showWebcam">
+    <div class="camera-on" *ngIf="!showWebcam">
         <div style="width: 100%; margin: auto;">
             <webcam [width]="1000" [trigger]="triggerObservable" (imageCapture)="handleImage($event)"
                 [switchCamera]="nextWebcamObservable"></webcam>
         </div>
         <div class="btn">
-            <button>capture</button>
-            <button>Back</button>
+            <button class="button" (click)="takeSnapshot()">capture</button>
+            <button (click)="goBack()">Back</button>
         </div>
+       
 
     </div>
     <div *ngIf="errors.length > 0">

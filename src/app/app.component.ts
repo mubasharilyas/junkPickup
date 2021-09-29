@@ -19,8 +19,8 @@ export class AppComponent implements OnInit {
   }
   title = 'junkPickup';
   ngOnInit() {
- 
+   
   }
 
- }
+}
 

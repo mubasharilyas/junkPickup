@@ -1,0 +1,75 @@
+<!-- <nav class="navigation">
+  <ul>
+    <li><a href="…">Climb Atlas</a></li>
+    <li><a href="…">Featured Climbs</a></li>
+    <li><a  [routerLink]="['/countries']">Explore</a></li>
+    <li><a href="…">Team</a></li>
+    <li><a href="…">Shop</a></li>
+  </ul>
+</nav> -->
+
+
+<a (click)="openMenu()" id="main-menu-toggle" class="menu-toggle" aria-label="Open main menu">
+    <span class="sr-only">Open main menu</span>
+    <span class="fa fa-bars" aria-hidden="true"></span>
+</a>
+
+<nav id="main-menu" class="main-menu" [class] = 'ClassesToApply'  aria-label="Main menu">
+    <a (click)="closeMenue()" id="main-menu-close" class="menu-close" aria-label="Close main menu">
+        <span class="sr-only">Close main menu</span>
+        <span class="close-btn" aria-hidden="true">&times;</span>
+    </a>
+
+
+
+    <div class="flex">
+
+        <ul>
+            <li><a href="…">Climb Atlas</a></li>
+            <li><a routerLink="featured-climbs">Featured Climbs</a></li>
+            <li><a routerLink="/countries">Explore</a></li>
+            <li><a href="…">Team</a></li>
+            <li><a href="…">Shop</a></li>
+
+
+
+
+
+
+
+
+        </ul>
+        <div class="flex pl-3 pl-lg-">
+
+            <div *ngIf="!NotLogedin" class="username-header">
+                {{profile.user.username}} <img class="profpic" src="{{profile.user.image}}" />
+            </div>
+
+            <div class="ml-lg-2" *ngIf="!NotLogedin">
+                <button (click)="logout()" class="ml-auto btn signup-btn">Log out</button>
+
+            </div>
+
+
+            <div *ngIf="activePage==='register'&&NotLogedin" class="ml-2">
+                <button routerLink="/login" class="ml-auto btn signup-btn">Log In</button>
+
+            </div>
+
+            <div *ngIf="activePage===''&&NotLogedin" class="ml-2">
+                <button routerLink="/login" class="ml-auto btn signup-btn">Log In</button>
+
+            </div>
+
+            <div *ngIf="activePage==='login'&&NotLogedin" class="ml-2">
+                <button routerLink="/register" class="ml-auto btn signup-btn">Sign up</button>
+
+            </div>
+        </div>
+
+
+    </div>
+
+</nav>
+
+<a  class="backdrop" tabindex="-1" aria-hidden="true" hidden></a>
