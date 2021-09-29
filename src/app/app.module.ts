@@ -11,8 +11,10 @@ import { WebcamModule } from 'ngx-webcam';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component'
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CameraComponent } from './camera/camera.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { JwtInterceptor } from "./jwt.interceptor";
+
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import { JwtInterceptor } from "./jwt.interceptor";
     TrashUploadComponent,
 
     AdminDashboardComponent,
+      CameraComponent
+
     NavigationComponent
   ],
   imports: [
