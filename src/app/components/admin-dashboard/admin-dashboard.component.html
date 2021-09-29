@@ -1,6 +1,6 @@
 
 
-<div style="overflow-x: auto;">
+<div *ngIf="currrentUser.isAdmin && details" style="overflow-x: auto;">
     <table>
         <tr >
 
@@ -32,5 +32,34 @@
 
 
 
-  <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+
+
+  <div style="overflow-x: auto;">
+    <table>
+        
+<div *ngIf="!currrentUser.isAdmin && details" style="overflow-x: auto;">
+        <tr >
+
+            <th style="width: 12%;">Picture</th>
+            <th style="width: 12%;">Category</th>
+            <th style="width: 12%;">address</th>
+            <th style="width: 12%;">Price</th>
+            <th style="width: 12%;">Status</th>
+            
+
+        </tr>
+        <tr *ngFor="let item of details | paginate: { itemsPerPage: 10, currentPage: p }">
+            <td><img src="picture.jpG" style="height: 30px; width:30px"></td>
+            <td>{{item.catagory}}</td>
+            <td>{{item.address}}</td>
+            <td>{{item.price}}</td>
+            <td>{{item.status}}</td>
+            
+            
+        </tr>
+        </div>
+
+    </table>
+</div>
+<pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
  
