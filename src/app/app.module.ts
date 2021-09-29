@@ -24,7 +24,7 @@ import { JwtInterceptor } from "./jwt.interceptor";
     TrashUploadComponent,
 
     AdminDashboardComponent,
-      CameraComponent
+      CameraComponent,
 
     NavigationComponent
   ],
