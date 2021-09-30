@@ -6,23 +6,22 @@ import { ActivatedRoute } from "@angular/router";
   styleUrls: ["./navigation.component.scss"],
 })
 export class NavigationComponent implements OnInit {
-  profile: any ;
+  profile: any;
   isLogedin: any;
-  user: any ;
+  user: any;
   ClassesToApply: string = '';
   activePage: any;
   token: any;
   NotLogedin = true;
   constructor(
-    // private authenticationService: AuthenticationService,
     private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
     this.getuser();
     this.checkIsLogedin();
-    // this.activePage = this.route.snapshot.routeConfig;
-    // this.activePage = this.activePage.path;
+    let routeConfig: any = this.route.snapshot.routeConfig;
+    this.activePage = routeConfig && routeConfig.path ? routeConfig.path : ''
   }
   public openMenu() {
     this.ClassesToApply = 'menu-target'
@@ -40,19 +39,19 @@ export class NavigationComponent implements OnInit {
 
     // )
 
-    // this.profile = localStorage.getItem("currentUser")
+    // this.profile = localStorage.getItem("user")
     // this.profile= JSON.parse(this.profile);
   }
   logout() {
     console.log("logout");
-
+    localStorage.removeItem("user")
     window.location.reload();
   }
 
   checkIsLogedin() {
-    // this.user = localStorage.getItem("currentUser");
-    // this.token = localStorage.getItem("token");
-
+    this.user = localStorage.getItem("user");
+    this.token = this.user ? this.user.token : null;
+    console.log(this.activePage, this.user)
     if (this.user == null && this.token == null) {
       this.NotLogedin = true;
     } else {
