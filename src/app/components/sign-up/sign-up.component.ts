@@ -8,12 +8,12 @@ import { FormControl, FormControlName, FormGroup, Validators } from '@angular/fo
 })
 export class SignUpComponent implements OnInit {
   userForm=new FormGroup({
-    yourName: new FormControl(''),
+    yourName: new FormControl('',[Validators.required]),
     email:new FormControl('', [Validators.required, Validators.email]),
-    contactNumber: new FormControl(''),
+    contactNumber: new FormControl('',[Validators.required]),
     address: new FormControl(''),
     password: new FormControl(''),
-    confirmPassword: new FormControl(''),
+    confirmPassword: new FormControl('',[Validators.required]),
   });
   submitted = false;
 
@@ -36,7 +36,7 @@ export class SignUpComponent implements OnInit {
 
     this.submitted = true;
     if (this.userForm.invalid) {
-      console.log('email required')
+      console.log('')
     }
     console.log('userForm', this.userForm.value)
     {
