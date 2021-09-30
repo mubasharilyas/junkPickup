@@ -19,6 +19,8 @@ import {  CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 // Import library module
 import { NgxSpinnerModule } from "ngx-spinner";
 
+
+
 @NgModule({
   declarations: [
     AppComponent,

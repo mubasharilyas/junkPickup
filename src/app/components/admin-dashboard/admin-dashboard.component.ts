@@ -11,7 +11,13 @@ import { NgxPaginationModule } from 'ngx-pagination';
 export class AdminDashboardComponent implements OnInit {
   collection: any;
   p: number = 1;
+
+  constructor() {
+  }
+  
+ 
   details: any = [
+
     {
       userName: 'Mubashar ilyas',
       address: 'burewala',

@@ -5,57 +5,84 @@
             <!-- <img src="images/signup-bg.jpg" alt=""> -->
             <div class="container">
                 <div class="signup-content">
-                    <form  [formGroup]="userForm" method="POST" id="signup-form" class="signup-form">
+                    <form [formGroup]="userForm" method="POST" id="signup-form" class="signup-form">
                         <h2 class="form-title">Create account</h2>
-                        <div class="form-group">
-                            <div *ngIf="userForm.controls.yourName.touched && userForm.controls.yourName.invalid"></div>
-                            <input type="text" placeholder="Your Name" class="form-input" name="name" id="name"  formControlName="yourName" />
-                            <div style="color: red;" *ngIf="userForm.controls.yourName.errors.required">Your Name is required.</div>
+                        <div class="alert alert-success">
+                            <strong>Account created Successfuly</strong> 
                         </div>
                         <div class="form-group">
-                            <input type="email" placeholder="Email"  class="form-input" name="email" id="email"
-                            formControlName="email"/>
-                            <div *ngIf="userForm.controls.email.touched && userForm.controls.email.invalid" >
-                                <div style="color: red;" *ngIf="userForm.controls.email.errors.required">Email is required.</div>
-                                <div style="color: red;" *ngIf="userForm.controls.email.errors && !userForm.controls.email.errors.required">Please, enter valid email address.</div>
+                            <input type="text" placeholder="Name" class="form-input" name="name" id="name"
+                                formControlName="yourName" />
+                            <div *ngIf="userForm.controls.yourName.touched && userForm.controls.yourName.invalid">
+
+                                <div style="color: red;" *ngIf="userForm.controls.yourName.errors.required">Name is
+                                    required</div>
 
                             </div>
-                           
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Email" class="form-input" name="email" id="email"
+                                formControlName="email" />
+                            <div *ngIf="userForm.controls.email.touched && userForm.controls.email.invalid">
+                                <div style="color: red;" *ngIf="userForm.controls.email.errors.required">Email is
+                                    required.</div>
+                                <div style="color: red;"
+                                    *ngIf="userForm.controls.email.errors && !userForm.controls.email.errors.required">
+                                    Please, enter valid email address.</div>
+
+                            </div>
+
                             <!-- <div *ngIf="submitted && userForm.controls.email.errors">Email must be a valid email address</div> -->
                         </div>
                         <div class="form-group">
-                            <input type="text" placeholder="Contact number"  class="form-input" name="contact" id="Contact"
-                            formControlName ="contactNumber" />
-                            <div style="color: red;" *ngIf="userForm.controls.contactNumber.errors.required">Contact Numbe is required</div>
-                        
+                            <input type="text" placeholder="Contact number" class="form-input" name="contact"
+                                id="Contact" formControlName="contactNumber" />
+                            <div *ngIf="userForm.controls.contactNumber.touched && userForm.controls.contactNumber.invalid">
+
+
+                                <div style="color: red;" *ngIf="userForm.controls.contactNumber.errors.required">
+                                    Contact
+                                    Numbe is required</div>
+                            </div>
+
                         </div>
                         <div class="form-group">
-                            <input type="email" placeholder="Address"  class="form-input" name="Address" id="Address"
-                            formControlName="address" />
+                            <input type="email" placeholder="Address" class="form-input" name="Address" id="Address"
+                                formControlName="address" />
                         </div>
                         <div class="form-group">
+
                             <input [type]="passwordType" placeholder="Password"  class="form-input" name="password" id="password"
                             formControlName="password" />
                             <span toggle="#password" (click)="onShow()" [class]="passwordClass"></span>
+
                         </div>
                         <div class="form-group">
-                            <input type="password" placeholder="Confirm Password"  class="form-input" name="re_password" id="re_password"
-                            formControlName="confirmPassword" />
-                            <div *ngIf="userForm.controls.confirmPassword.touched && userForm.controls.confirmPassword.invalid" ></div>
-                            <div style="color: red;" *ngIf="userForm.controls.confirmPassword.errors.required">Confirm Password is required</div>
-                            <div style="color: red;" *ngIf="userForm.controls.confirmPassword.errors && !userForm.controls.confirmPassword.errors.required">Password and confirm Password does not match</div>
-                            
+                            <input type="password" placeholder="Confirm Password" class="form-input" name="re_password"
+                                id="re_password" formControlName="confirmPassword" />
+                            <div
+                                *ngIf="userForm.controls.confirmPassword.touched && userForm.controls.password.touched">
+
+
+                                <div style="color: red;"
+                                    *ngIf="userForm.controls.confirmPassword.value != userForm.controls.password.value">
+                                    Password and confirm Password does not match</div>
+                            </div>
                         </div>
                         <div class="form-group">
                             <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
-                           
+
                         </div>
                         <div class="form-group">
-                            <input  (click)='onSubmit()' type="submit" name="submit" id="submit" class="form-submit" value="Sign up" />
+
+                            <input (click)='onSubmit()' type="submit" name="submit" id="submit" class="form-submit"
+                                value="Sign up" />
                         </div>
+
                     </form>
-                    <p class="loginhere">
-                        Have already an account ? <a href="#" class="loginhere-link">Login here</a>
+
+                    <p class="loginhere">Have already an account ? <a (click)="btnClick()" class="loginhere-link">Login
+                            here</a>
                     </p>
                 </div>
             </div>
@@ -67,4 +94,3 @@
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="js/main.js"></script>
 </div>
-

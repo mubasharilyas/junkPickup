@@ -36,7 +36,10 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('user', JSON.stringify(data))
     })
     if (this.usersData.invalid) {
-      console.log('email required')
+      console.log('email required');
+    }
+    else{
+      console.log('email valid');
     }
     console.log(this.usersData.value);
 
