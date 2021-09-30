@@ -16,7 +16,7 @@ export class AdminDashboardComponent implements OnInit {
   }
   
   currrentUser:any={isAdmin:false}
-  public details = [
+   details = [
     {
       customer: 'Mubashar ilyas',
       address: 'burewala',

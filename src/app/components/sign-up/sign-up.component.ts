@@ -1,23 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service'
 import { FormControl, FormControlName, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss']
 })
 export class SignUpComponent implements OnInit {
-  userForm=new FormGroup({
-    yourName: new FormControl('',[Validators.required]),
-    email:new FormControl('', [Validators.required, Validators.email]),
-    contactNumber: new FormControl('',[Validators.required]),
+  userForm:any = new FormGroup({
+    yourName: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    contactNumber: new FormControl('', [Validators.required]),
     address: new FormControl(''),
     password: new FormControl(''),
-    confirmPassword: new FormControl('',[Validators.required]),
+    confirmPassword: new FormControl('', [Validators.required]),
   });
   submitted = false;
 
-  constructor(public api: ApiService) { }
+  constructor(public api: ApiService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -31,23 +32,23 @@ export class SignUpComponent implements OnInit {
   }
   isPasswordMatch = true
 
+  btnClick() {
+    this.router.navigate(['/login']);
+  }
+   onSubmit() {
+  
 
-  public onSubmit() {
 
-    this.submitted = true;
-    if (this.userForm.invalid) {
-      console.log('')
-    }
     console.log('userForm', this.userForm.value)
     {
-      if ((this.data.password == this.data.confirmPassword)) {
-        this.isPasswordMatch = true;
+      if (!this.userForm.invalid && (this.userForm.controls.confirmPassword.value == this.userForm.controls.password.value)) {
+        console.log('valid');
+      }
+      else{
+        console.log('invalid');
         // this.api.postData('http://localhost:8081/api/v1/signUp', this.data)
       }
-      else {
-        this.isPasswordMatch = false;
-
-      }
+      
     }
   }
   passwordType = "password"
