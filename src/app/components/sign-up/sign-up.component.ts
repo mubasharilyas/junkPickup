@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service'
 import { FormControl, FormControlName, FormGroup, Validators } from '@angular/forms';
+import { NgHttpLoaderModule } from 'ng-http-loader';
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -8,12 +9,12 @@ import { FormControl, FormControlName, FormGroup, Validators } from '@angular/fo
 })
 export class SignUpComponent implements OnInit {
   userForm=new FormGroup({
-    yourName: new FormControl(''),
+    yourName: new FormControl('',[Validators.required]),
     email:new FormControl('', [Validators.required, Validators.email]),
-    contactNumber: new FormControl(''),
+    contactNumber: new FormControl('',[Validators.required]),
     address: new FormControl(''),
     password: new FormControl(''),
-    confirmPassword: new FormControl(''),
+    confirmPassword: new FormControl('',[Validators.required]),
   });
   submitted = false;
 
@@ -36,7 +37,7 @@ export class SignUpComponent implements OnInit {
 
     this.submitted = true;
     if (this.userForm.invalid) {
-      console.log('email required')
+      console.log('')
     }
     console.log('userForm', this.userForm.value)
     {
@@ -51,12 +52,12 @@ export class SignUpComponent implements OnInit {
     }
   }
   passwordType = "password"
-  passwordClass = "fas fa-eye"
+  passwordClass = "fa fa-eye field-icon toggle-password"
 
   public onShow() {
 
     this.passwordType = this.passwordType == "text" ? "password" : "text"
-    this.passwordClass = this.passwordClass == "fa fa-eye-slash" ? "fas fa-eye" : "fa fa-eye-slash"
+    this.passwordClass = this.passwordClass == "fa fa-eye-slash field-icon toggle-password" ? "fa fa-eye field-icon toggle-password" : "fa fa-eye-slash field-icon toggle-password"
 
   }
 

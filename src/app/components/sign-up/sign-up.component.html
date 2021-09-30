@@ -8,34 +8,47 @@
                     <form  [formGroup]="userForm" method="POST" id="signup-form" class="signup-form">
                         <h2 class="form-title">Create account</h2>
                         <div class="form-group">
+                            <div *ngIf="userForm.controls.yourName.touched && userForm.controls.yourName.invalid"></div>
                             <input type="text" placeholder="Your Name" class="form-input" name="name" id="name"  formControlName="yourName" />
+                            <div style="color: red;" *ngIf="userForm.controls.yourName.errors.required">Your Name is required.</div>
                         </div>
                         <div class="form-group">
                             <input type="email" placeholder="Email"  class="form-input" name="email" id="email"
                             formControlName="email"/>
-                            <!-- <div *ngIf="submitted && userForm.controls.email.errors" class="invalid-feedback">this not find</div> -->
+                            <div *ngIf="userForm.controls.email.touched && userForm.controls.email.invalid" >
+                                <div style="color: red;" *ngIf="userForm.controls.email.errors.required">Email is required.</div>
+                                <div style="color: red;" *ngIf="userForm.controls.email.errors && !userForm.controls.email.errors.required">Please, enter valid email address.</div>
+
+                            </div>
+                           
                             <!-- <div *ngIf="submitted && userForm.controls.email.errors">Email must be a valid email address</div> -->
                         </div>
                         <div class="form-group">
-                            <input type="email" placeholder="Contact number"  class="form-input" name="contact" id="Contact"
+                            <input type="text" placeholder="Contact number"  class="form-input" name="contact" id="Contact"
                             formControlName ="contactNumber" />
+                            <div style="color: red;" *ngIf="userForm.controls.contactNumber.errors.required">Contact Numbe is required</div>
+                        
                         </div>
                         <div class="form-group">
                             <input type="email" placeholder="Address"  class="form-input" name="Address" id="Address"
                             formControlName="address" />
                         </div>
                         <div class="form-group">
-                            <input type="text" placeholder="Password"  class="form-input" name="password" id="password"
+                            <input [type]="passwordType" placeholder="Password"  class="form-input" name="password" id="password"
                             formControlName="password" />
-                            <span toggle="#password" class="fa fa-eye field-icon toggle-password"></span>
+                            <span toggle="#password" (click)="onShow()" [class]="passwordClass"></span>
                         </div>
                         <div class="form-group">
                             <input type="password" placeholder="Confirm Password"  class="form-input" name="re_password" id="re_password"
                             formControlName="confirmPassword" />
+                            <div *ngIf="userForm.controls.confirmPassword.touched && userForm.controls.confirmPassword.invalid" ></div>
+                            <div style="color: red;" *ngIf="userForm.controls.confirmPassword.errors.required">Confirm Password is required</div>
+                            <div style="color: red;" *ngIf="userForm.controls.confirmPassword.errors && !userForm.controls.confirmPassword.errors.required">Password and confirm Password does not match</div>
+                            
                         </div>
                         <div class="form-group">
                             <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
-                            <!-- <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label> -->
+                           
                         </div>
                         <div class="form-group">
                             <input  (click)='onSubmit()' type="submit" name="submit" id="submit" class="form-submit" value="Sign up" />
@@ -47,8 +60,8 @@
                 </div>
             </div>
         </section>
-
     </div>
+ 
 
     <!-- JS -->
     <script src="vendor/jquery/jquery.min.js"></script>

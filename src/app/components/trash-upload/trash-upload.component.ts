@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output, ViewChild, AfterViewInit } fro
 import { WebcamImage, WebcamInitError, WebcamUtil } from 'ngx-webcam';
 import { Observable, Subject } from 'rxjs';
 import { ApiService } from '../../services/api.service';
-
+import { NgxSpinnerService } from "ngx-spinner";
 @Component({
   selector: 'app-trash-upload',
   templateUrl: './trash-upload.component.html',
@@ -26,7 +26,7 @@ export class TrashUploadComponent implements OnInit, AfterViewInit {
   private trigger: Subject<void> = new Subject<void>();
   private nextWebcam: Subject<boolean | string> = new Subject<boolean | string>();
 
-  constructor(public api: ApiService) {
+  constructor(public api: ApiService, private spinner: NgxSpinnerService) {
 
   }
   ngAfterViewInit(): void {
@@ -58,11 +58,20 @@ export class TrashUploadComponent implements OnInit, AfterViewInit {
 
 
   }
-  ngOnInit(): void {
+  ngOnInit():
+    void {
     WebcamUtil.getAvailableVideoInputs()
       .then((mediaDevices: MediaDeviceInfo[]) => { 
         this.isCameraExist = mediaDevices && mediaDevices.length > 0;
       });
+      setTimeout(() => {
+      this.spinner.show();
+    }, 5000);
+
+    // setTimeout(() => {
+    //   /** spinner ends after 5 seconds */
+    //   this.spinner.hide();
+    // }, 5000);
 
 
   }
@@ -108,7 +117,8 @@ export class TrashUploadComponent implements OnInit, AfterViewInit {
     this.api.postData('http://localhost:8081/api/v1/createJunk', this.upload).subscribe(data => {
       console.log(data)
     })
-  }
+    
+}
   handleImage(webcamImage: any) {
     console.log(webcamImage._imageAsDataUrl)
     this.upload.image = webcamImage._imageAsDataUrl;
