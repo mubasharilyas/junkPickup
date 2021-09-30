@@ -14,7 +14,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CameraComponent } from './camera/camera.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { JwtInterceptor } from "./jwt.interceptor";
-
+import { NgxUiLoaderModule } from "ngx-ui-loader";
+import {  CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+// Import library module
+import { NgxSpinnerModule } from "ngx-spinner";
 
 
 
@@ -28,7 +31,8 @@ import { JwtInterceptor } from "./jwt.interceptor";
     AdminDashboardComponent,
       CameraComponent,
 
-    NavigationComponent
+    NavigationComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -37,12 +41,15 @@ import { JwtInterceptor } from "./jwt.interceptor";
     FormsModule,
     WebcamModule,
     NgxPaginationModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxUiLoaderModule,
+    NgxSpinnerModule,
 
 
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

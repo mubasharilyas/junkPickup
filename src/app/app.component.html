@@ -1,20 +1,22 @@
-<div class="header">
+<div class="header" >
   <div class="header-wrapper">
     <app-navigation class="nav-component"></app-navigation>
   </div>
 </div>
 
+<div style="position: relative">
+  <!-- the position of the parent container must be set to relative -->
+  <!-- It is really important to set loaderId for non-master loader -->
+  
+</div>
 <nav>
   <li><a routerLink="/login">LogIn</a></li><br>
   <li><a routerLink="/sign-up">Sign-Up</a></li><br>
   <li><a routerLink="/trash-upload">trash-upload</a></li><br>
 
-  <li><a routerLink="/admin-dashboard">Admindashboard</a></li>
 
-</nav>
-
+<ngx-spinner></ngx-spinner>
 <router-outlet></router-outlet> 
-
 
 
  

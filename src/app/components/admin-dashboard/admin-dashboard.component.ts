@@ -15,10 +15,11 @@ export class AdminDashboardComponent implements OnInit {
   constructor() {
   }
   
-  currrentUser:any={isAdmin:false}
-   details = [
+ 
+  details: any = [
+
     {
-      customer: 'Mubashar ilyas',
+      userName: 'Mubashar ilyas',
       address: 'burewala',
       picture: 'abc',
       catagory: 'lk',
@@ -26,13 +27,16 @@ export class AdminDashboardComponent implements OnInit {
       price: '350'
     }
 
-  ]
+  ];
+  currrentUser: any ;
+  constructor(public api: ApiService) {
+  }
+
   status = ['inprogress', 'Completed', 'contacted the user', 'need to contact customer price', 'approved']
   onPageChange(event: any) {
     this.p = event
   }
   saveData(item: any) {
-    this.currrentUser=false;
     console.log(item)
   }
 
@@ -42,10 +46,19 @@ export class AdminDashboardComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.currrentUser= localStorage.getItem('user')
+    this.currrentUser = JSON.parse(this.currrentUser)
     this.getAllData();
   }
 
   getAllData() {
+  
+    console.log(this.currrentUser)
+    this.api.getData('http://localhost:8081/api/v1/getJunksByUser?userId=' + this.currrentUser.id).subscribe(data => {
+      this.details = data;
+      console.log(this.details)
+    }
+    )
 
   }
 }

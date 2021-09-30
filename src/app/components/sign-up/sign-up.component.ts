@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service'
 import { FormControl, FormControlName, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgHttpLoaderModule } from 'ng-http-loader';
+
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -52,12 +54,12 @@ export class SignUpComponent implements OnInit {
     }
   }
   passwordType = "password"
-  passwordClass = "fas fa-eye"
+  passwordClass = "fa fa-eye field-icon toggle-password"
 
   public onShow() {
 
     this.passwordType = this.passwordType == "text" ? "password" : "text"
-    this.passwordClass = this.passwordClass == "fa fa-eye-slash" ? "fas fa-eye" : "fa fa-eye-slash"
+    this.passwordClass = this.passwordClass == "fa fa-eye-slash field-icon toggle-password" ? "fa fa-eye field-icon toggle-password" : "fa fa-eye-slash field-icon toggle-password"
 
   }
 
