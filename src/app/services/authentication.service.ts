@@ -8,13 +8,13 @@
 // @Injectable({ providedIn: 'root' })
 // export class AuthenticationService {
 //   private currentUserSubject: BehaviorSubject<User>;
-//   public currentUser: Observable<User>;
+//   public user: Observable<User>;
 //   // public isLOgedin;
 //   localStored: any;
 //   constructor(private http: HttpClient) {
-//     this.localStored = localStorage.getItem('currentUser')
+//     this.localStored = localStorage.getItem('user')
 //     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(this.localStored));
-//     this.currentUser = this.currentUserSubject.asObservable();
+//     this.user = this.currentUserSubject.asObservable();
 //   }
 
 //   public get currentUserValue(): User {
@@ -27,7 +27,7 @@
 
 //         if (user.success) {
 //           // store user details and jwt token in local storage to keep user logged in between page refreshes
-//           localStorage.setItem('currentUser', JSON.stringify(user));
+//           localStorage.setItem('user', JSON.stringify(user));
 //           localStorage.setItem('token', JSON.stringify(user.token));
 //           this.currentUserSubject.next(user);
 //           //  this.isLOgedin=true
@@ -41,13 +41,13 @@
 
 //   logout() {
 //     // remove user from local storage and set current user to null
-//     localStorage.removeItem('currentUser');
+//     localStorage.removeItem('user');
 //     localStorage.removeItem('token');
 //     // this.currentUserSubject.next(null);
 //     //  this.isLOgedin=false
 //   }
 //   getuser() {
-//     return this.currentUser
+//     return this.user
 //   }
 
 

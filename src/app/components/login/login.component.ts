@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
     this.apiService.postData('http://localhost:8081/api/v1/login', this.usersData.value).subscribe(data => {
       console.log(data)
-      localStorage.setItem('currentUser', data)
+      localStorage.setItem('user', JSON.stringify(data))
     })
     if (this.usersData.invalid) {
       console.log('email required')

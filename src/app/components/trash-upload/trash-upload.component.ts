@@ -111,9 +111,9 @@ export class TrashUploadComponent implements OnInit, AfterViewInit {
     this.showWebcam = false;
   }
   btnUpload() {
-    let currentUser: any = localStorage.getItem('currentUser')
+    let user: any = localStorage.getItem('user')
 
-    // this.upload.userId = currentUser.id
+    // this.upload.userId = user.id
     this.api.postData('http://localhost:8081/api/v1/createJunk', this.upload).subscribe(data => {
       console.log(data)
     })

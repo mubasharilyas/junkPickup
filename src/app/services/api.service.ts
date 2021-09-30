@@ -11,12 +11,7 @@ export class ApiService {
   displayVal: any;
   postId: any;
   getData(url: any) {
-    this.http.get(url).subscribe((data) => {
-      this.displayVal = data;
-      console.log(data)
-      return data;
-
-    })
+    return this.http.get(url)
 
   }
   postData(url: any, data: any) {
@@ -34,14 +29,14 @@ export class ApiService {
         alert('Uploaded Successfully.');
       })
 
-    }
-    public updateJunk(postData: any) {
-      let endPoints = "/posts/1"
-      this.http.put(
-        endPoints, postData).subscribe(data => {
+  }
+  public updateJunk(postData: any) {
+    let endPoints = "/posts/1"
+    this.http.put(
+      endPoints, postData).subscribe(data => {
         console.log(data);
       });
-    }
+  }
 
 
 
