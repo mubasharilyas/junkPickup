@@ -1,21 +1,24 @@
-table{
+table {
     width: 100%;
     border-collapse: collapse;
     border: solid black 2px;
-    
+    margin-top: 50px;
+    font-size: 2px;
 }
 th{
     background-color:tomato;
-    font-size: 20px;
+    font-size: 13px;
     color: #fff;
 }
 th,td{
     text-align: left;
-    padding: 5px;
-    min-width: 20%;
+    padding: 1%;
+    width: auto;
+    border-collapse: collapse;
+    
 }
 td{
-    background-color:black;
+
     border-bottom: 1px solid #dddddd;
     color: white;
 }
@@ -32,3 +35,12 @@ input{
 select{
     width: 80%;
 }
+
+   tr:nth-child(even):hover{
+       background-color:gray ;
+   } 
+   .control{
+       text-align: center;
+       margin-top: 10px;
+       color: blue;
+   }

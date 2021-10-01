@@ -12,8 +12,7 @@ export class AdminDashboardComponent implements OnInit {
   collection: any;
   p: number = 1;
 
-  constructor() {
-  }
+
   
  
   details: any = [
@@ -28,7 +27,7 @@ export class AdminDashboardComponent implements OnInit {
     }
 
   ];
-  currrentUser: any ;
+  currrentUser: any ={isAdmin:false};
   constructor(public api: ApiService) {
   }
 
@@ -46,19 +45,19 @@ export class AdminDashboardComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.currrentUser= localStorage.getItem('user')
-    this.currrentUser = JSON.parse(this.currrentUser)
-    this.getAllData();
+    // this.currrentUser= localStorage.getItem('user')
+    // this.currrentUser = JSON.parse(this.currrentUser)
+    // this.getAllData();
   }
 
   getAllData() {
   
     console.log(this.currrentUser)
-    this.api.getData('http://localhost:8081/api/v1/getJunksByUser?userId=' + this.currrentUser.id).subscribe(data => {
-      this.details = data;
-      console.log(this.details)
-    }
-    )
+    // this.api.getData('http://localhost:8081/api/v1/getJunksByUser?userId=' + this.currrentUser.id).subscribe(data => {
+    //   this.details = data;
+    //   console.log(this.details)
+    // }
+    // )
 
   }
 }
