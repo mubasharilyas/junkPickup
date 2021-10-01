@@ -38,12 +38,12 @@
 
 
         </ul>
-        <div class="flex pl-3 pl-lg-">
+        <div class="flex pl-3 pl-lg-" style="height: 45px;">
 
 
 
             <div class="ml-lg-2" *ngIf="!NotLogedin">
-                <button (click)="logout()" class="ml-auto btn signup-btn">Log out</button>
+                <button (click)="logout()" class="ml-auto btn signup-btn" >Log out</button>
 
             </div>
 
@@ -54,12 +54,12 @@
             </div>
 
             <div *ngIf="NotLogedin" class="ml-2">
-                <button routerLink="/login" class="ml-auto btn signup-btn">Log In</button>
+                <button routerLink="/login" class="ml-auto btn signup-btn" >Log In</button>
 
             </div>
 
             <div *ngIf="NotLogedin" class="ml-2">
-                <button routerLink="/sign-up" class="ml-auto btn signup-btn">Sign up</button>
+                <button routerLink="/sign-up" class="ml-auto btn signup-btn" style="margin:10px;">Sign up</button>
 
             </div>
         </div>
