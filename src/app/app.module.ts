@@ -18,6 +18,10 @@ import { NgxUiLoaderModule } from "ngx-ui-loader";
 import {  CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 // Import library module
 import { NgxSpinnerModule } from "ngx-spinner";
+import { CategoryComponent } from './components/category/category.component';
+import { AuthGuard } from './auth/auth.guard';
+import { CanActivate } from '@angular/router';
+import { AuthenticationService } from './services/authentication.service';
 
 
 
@@ -32,6 +36,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
       CameraComponent,
 
     NavigationComponent,
+      CategoryComponent,
     
   ],
   imports: [
@@ -47,7 +52,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
 
 
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },AuthGuard,AuthenticationService,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
