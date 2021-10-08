@@ -1,0 +1,47 @@
+
+    <table >
+        <button #uname (click)="addNew(uname)" style="float: left;color: white; width:80px; height: 40px;font-size: 15px;margin-top: 30px;">Add</button>
+        <tr >
+            <th >Category</th>
+            <th  >Price</th>
+            <th >Action</th>
+
+        </tr>
+        <tr *ngFor="let item of categoryName;index as i">
+            <td >
+                <input [(ngModel)]="item.price"  type="text" style="height: 30px; width: 70%;">
+            </td>
+            <td>
+                <input [(ngModel)]="item.category"  type="text"  style="height: 30px; width: 70%;">  
+            </td>
+            <td>
+                <button  >save</button>
+                <button (click)="onRemove(i)">delete</button>
+            </td>
+        </tr>
+        <tr>
+            <tr *ngFor="let item of categoryName;index as i">
+                <td >
+                    <input [(ngModel)]="item.price"  type="text" style="height: 30px; width: 70%;">
+                </td>
+                <td>
+                    <input [(ngModel)]="item.category"  type="text"  style="height: 30px; width: 70%;">  
+                </td>
+                <td>
+                    <button  >save</button>
+                    <button (click)="onRemove(i)">delete</button>
+                </td>
+            </tr>
+            
+          
+    
+
+    </table>
+
+
+
+
+
+
+
+
