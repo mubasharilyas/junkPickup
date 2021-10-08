@@ -1,26 +1,30 @@
-<div class="body" >
-    
+<div class="body">
+
 
 
     <div class="wrapper" *ngIf="!showWebcam">
         <header>
             <h1>Create</h1>
-        </header>
 
+        </header>
+        <div *ngIf="uploaded" class="alert alert-success">
+            <strong>Account created Successfuly</strong>
+        </div>
         <div class="ways">
             <ul>
                 <li #upload id="upload" (click)="clickUpload()">
-                    Select Image
+                    {{ junkFormDat.fileName? junkFormDat.fileName:'Select Image'}}
                 </li>
-                
+
             </ul>
         </div>
 
         <div class="sections">
 
             <section class="active">
-                <input type="text" placeholder="numberOfItem" id="title" />
-                <select class="category">
+                <select class="category"  [(ngModel)]="junkFormDat.category">
+                    <option value="" disabled>Select Category</option>
+
                     <option value="sofa">Sofa</option>
                     <option value="printer">Printer</option>
                     <option value="dinningTable">Dinning Table</option>
@@ -28,6 +32,7 @@
                     <option value="tv">Tv</option>
 
                 </select>
+                <input type="text" placeholder="Number of Items" id="title" [(ngModel)]="junkFormDat.numberOfItems" />
 
             </section>
 
@@ -36,24 +41,24 @@
         </div>
 
         <footer>
-            <ul >
-               
+            <ul>
+
 
                 <button style="margin-left: 35%" (click)="btnUpload()" onclick="errorMessage()">Submit</button>
             </ul>
         </footer>
 
     </div>
-   
+
     <div class="camera-on" *ngIf="showWebcam">
         <div style="width:100%; margin: auto;">
             <input type="file" accept="image/*" capture="camera">
 
 
         </div>
-     
-       
-      
+
+
+
     </div>
     <div *ngIf="errors.length > 0">
         <h4>Error Messages:</h4>
@@ -61,8 +66,5 @@
             <li>{{ error | json }}</li>
         </ul>
     </div>
-    
-    <ngx-spinner></ngx-spinner>
+
 </div>
-
-

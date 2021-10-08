@@ -25,9 +25,9 @@
     <div class="flex">
 
         <ul>
-            <li *ngIf="!NotLogedin"><a routerLink="/admin-dashboard">Dashboard</a></li>
+            <li *ngIf="isLoggedIn" ><a routerLink="/admin-dashboard">Dashboard</a></li>
 
-            <li *ngIf="!NotLogedin"><a routerLink="/trash-upload">Create Trash</a></li><br>
+            <li *ngIf=" isLoggedIn && user && !user.isAdmin" ><a routerLink="/trash-upload" >Create Trash</a></li><br>
 
             <li><a routerLink="/category">Category</a></li>
 
@@ -44,23 +44,23 @@
 
 
 
-            <div class="ml-lg-2" *ngIf="!NotLogedin">
+            <div class="ml-lg-2" *ngIf="isLoggedIn">
                 <button (click)="logout()" class="ml-auto btn signup-btn" >Log out</button>
 
             </div>
 
 
-            <div *ngIf="activePage==='sign-up'&&NotLogedin" class="ml-2">
+            <div *ngIf="activePage==='sign-up'&&!isLoggedIn" class="ml-2">
                 <button routerLink="/login" class="ml-auto btn signup-btn">Log In</button>
 
             </div>
 
-            <div *ngIf="NotLogedin" class="ml-2">
+            <div *ngIf="!isLoggedIn" class="ml-2">
                 <button routerLink="/login" class="ml-auto btn signup-btn" >Log In</button>
 
             </div>
 
-            <div *ngIf="NotLogedin" class="ml-2">
+            <div *ngIf="!isLoggedIn" class="ml-2">
                 <button routerLink="/sign-up" class="ml-auto btn signup-btn" style="margin:10px;">Sign up</button>
 
             </div>

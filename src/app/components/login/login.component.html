@@ -1,36 +1,42 @@
 <div style="background-color: #666666;">
-	
+
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-				<form [formGroup]="usersData"class="login100-form validate-form">
-					<span class="login100-form-title p-b-43" style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; color: blue;">
+				<form [formGroup]="usersData" class="login100-form validate-form">
+					<span class="login100-form-title p-b-43"
+						style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; color: blue;">
 						Login
 					</span>
-					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<input  formControlName="email" class="input100" type="text" name="email">
-						<div style="color: red;" *ngIf="submitted && usersData.controls.email.errors" class="invalid-feedback">this not find email</div>
-						<div style="color: red;"  *ngIf="submitted && usersData.controls.email.errors">Email must be a valid email address</div> 
-						<span class="focus-input100"></span>
-						<span class="label-input100">Email</span>
-					</div>
-                    
+					<div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+						<input formControlName="email" class="input100" placeholder="Email" type="text" name="email">
+						<div style="color: red;" *ngIf="submitted && usersData.controls.email.errors"
+							class="invalid-feedback">this not find email</div>
+						<div style="color: red;" *ngIf="submitted && usersData.controls.email.errors">Email must be a
+							valid email address</div>
 
-					
-					
+					</div>
+
+
+
+
 					<div class="wrap-input100 validate-input" data-validate="Password is required">
-						<input formControlName="password" class="input100" type="password" name="pass">
-						<span class="focus-input100"></span>
-						<span class="label-input100">Password</span>
-					</div>
+						<input formControlName="password" placeholder="Password" class="input100" type="password"
+							name="pass">
 
+					</div>
+					<div>
+						<input type="text" id="authcode" class="form-control" *ngIf="this.tfaFlag" name="authcode" autocomplete="off"
+						formControlName="authcode" placeholder=" Enter the Code"
+						title="Please enter the code" required>
+					</div>
 					<div class="flex-sb-m w-full p-t-3 p-b-32">
 						<div class="contact100-form-checkbox">
 							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
 							<!-- <label class="label-checkbox100" for="ckb1"> -->
-								<!-- Remember me  -->
-							 <!-- </label> -->
-						</div>	
+							<!-- Remember me  -->
+							<!-- </label> -->
+						</div>
 
 						<div>
 							<a href="#" class="txt1">
@@ -38,14 +44,14 @@
 							</a>
 						</div>
 					</div>
-			
+
 
 					<div class="container-login100-form-btn">
 						<button (click)="submit('data')" class="login100-form-btn" style="background-color:red">
 							Login
 						</button>
 					</div>
-					
+
 					<!-- <div class="text-center p-t-46 p-b-20">
 						<span class="txt2">
 							or sign up using
@@ -63,31 +69,31 @@
 					</div> -->
 				</form>
 
-				<div class="login100-more" style="background-image: url('images/bg-01.jpg');">
+				<div class="login100-more" style="background-image: url('../../../assets/trash.jpg');">
 				</div>
 			</div>
 		</div>
 	</div>
-	
-	
 
-	
-	
-<!--===============================================================================================-->
+
+
+
+
+	<!--===============================================================================================-->
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="vendor/animsition/js/animsition.min.js"></script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="vendor/bootstrap/js/popper.js"></script>
 	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="vendor/select2/select2.min.js"></script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="vendor/daterangepicker/moment.min.js"></script>
 	<script src="vendor/daterangepicker/daterangepicker.js"></script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="vendor/countdowntime/countdowntime.js"></script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="js/main.js"></script>
 
 </div>
@@ -153,4 +159,4 @@
             </div>
         </div>
     </div>
-</div> --> -->
+</div> -->

@@ -7,15 +7,15 @@
                 <div class="signup-content">
                     <form [formGroup]="userForm" method="POST" id="signup-form" class="signup-form">
                         <h2 class="form-title" style="font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; color:red;">Create account</h2>
-                        <div class="alert alert-success">
+                        <!-- <div  class="alert alert-success">
                             <strong>Account created Successfuly</strong> 
-                        </div>
+                        </div> -->
                         <div class="form-group">
                             <input type="text" placeholder="Name" class="form-input" name="name" id="name"
-                                formControlName="yourName" />
-                            <div *ngIf="userForm.controls.yourName.touched && userForm.controls.yourName.invalid">
+                                formControlName="userName" />
+                            <div *ngIf="userForm.controls.userName.touched && userForm.controls.userName.invalid">
 
-                                <div style="color: red;" *ngIf="userForm.controls.yourName.errors.required">Name is
+                                <div style="color: red;" *ngIf="userForm.controls.userName.errors.required">Name is
                                     required</div>
 
                             </div>
@@ -47,8 +47,15 @@
 
                         </div>
                         <div class="form-group">
-                            <input type="email" placeholder="Address" class="form-input" name="Address" id="Address"
+                            <input type="text" placeholder="Address" class="form-input" name="Address" id="Address"
                                 formControlName="address" />
+                                <div *ngIf="userForm.controls.address.touched && userForm.controls.address.invalid">
+
+
+                                    <div style="color: red;" *ngIf="userForm.controls.address.errors.required">
+                                        Address
+                                         is required</div>
+                                </div>
                         </div>
                         <div class="form-group">
 
@@ -58,7 +65,7 @@
 
                         </div>
                         <div class="form-group">
-                            <input type="password" placeholder="Confirm Password" class="form-input" name="re_password"
+                            <input [type]="passwordType" placeholder="Confirm Password" class="form-input" name="re_password"
                                 id="re_password" formControlName="confirmPassword" />
                             <div
                                 *ngIf="userForm.controls.confirmPassword.touched && userForm.controls.password.touched">
