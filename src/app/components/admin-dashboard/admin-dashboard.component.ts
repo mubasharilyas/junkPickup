@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControlDirective } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { LoginServiceService } from 'src/app/services/login-service/login-service.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -13,25 +14,21 @@ export class AdminDashboardComponent implements OnInit {
   p: number = 1;
 
 
-  
- 
+
+
   details: any = [
 
-    {
-      userName: 'Mubashar ilyas',
-      address: 'burewala',
-      picture: 'abc',
-      catagory: 'lk',
-      status: 'asdsd',
-      price: '350'
-    }
+
 
   ];
-  currrentUser: any ={isAdmin:false};
-  constructor(public api: ApiService) {
+  currrentUser: any = { isAdmin: false };
+  constructor(public api: ApiService, private _loginService: LoginServiceService) {
+    this._loginService.userSub.subscribe((data: any) => {
+      this.currrentUser = data;
+    })
   }
 
-  status = ['inprogress', 'Completed', 'contacted the user', 'need to contact customer price', 'approved']
+  status = ['In Progress', 'Completed', 'Contacted the user', 'Need to contact customer', 'Approved']
   onPageChange(event: any) {
     this.p = event
   }
@@ -45,19 +42,28 @@ export class AdminDashboardComponent implements OnInit {
 
 
   ngOnInit(): void {
-    // this.currrentUser= localStorage.getItem('user')
-    // this.currrentUser = JSON.parse(this.currrentUser)
-    // this.getAllData();
+    this.currrentUser = this._loginService.getUserStatus()
+    this.getAllData();
   }
 
   getAllData() {
-  
+
     console.log(this.currrentUser)
-    // this.api.getData('http://localhost:8081/api/v1/getJunksByUser?userId=' + this.currrentUser.id).subscribe(data => {
-    //   this.details = data;
-    //   console.log(this.details)
-    // }
-    // )
+    let url = this.currrentUser && this.currrentUser.isAdmin ? 'http://localhost:8081/api/v1/getJunksByAdmin' : 'http://localhost:8081/api/v1/getJunksByUser?userId=' + this.currrentUser.id
+    this.api.getData(url).subscribe(data => {
+      this.details = data;
+      console.log(this.details)
+    }
+    )
+
+  }
+  updateJunk(junk: any) {
+
+    this.api.putData('http://localhost:8081/api/v1/updateJunk', { price: junk.price, status: junk.status, id: junk.junkId, userId: junk.userId }).subscribe(data => {
+      this.getAllData()
+      console.log(this.details)
+    }
+    )
 
   }
 }

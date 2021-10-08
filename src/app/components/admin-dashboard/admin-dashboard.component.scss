@@ -18,9 +18,8 @@ th,td{
     
 }
 td{
-
+font-size: 4vh;
     border-bottom: 1px solid #dddddd;
-    color: white;
 }
 button{
     background-color:red;
@@ -36,9 +35,7 @@ select{
     width: 80%;
 }
 
-   tr:nth-child(even):hover{
-       background-color:gray ;
-   } 
+  
    .control{
        text-align: center;
        margin-top: 10px;

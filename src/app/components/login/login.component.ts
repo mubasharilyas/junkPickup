@@ -2,7 +2,8 @@ import { LocationStrategy } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { observable } from 'rxjs';
+import { Router } from "@angular/router";
+import { LoginServiceService } from 'src/app/services/login-service/login-service.service';
 
 
 @Component({
@@ -14,11 +15,14 @@ import { observable } from 'rxjs';
 export class LoginComponent implements OnInit {
   usersData = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('',)
+    password: new FormControl(''),
+    authcode: new FormControl('')
   });
   submitted = false;
+  tfaFlag = false;
+  errorMessage: any = null
 
-  constructor(public apiService: ApiService
+  constructor(public apiService: ApiService, private _loginService: LoginServiceService, public router: Router
   ) { }
 
   ngOnInit(): void {
@@ -31,19 +35,22 @@ export class LoginComponent implements OnInit {
 
   submit(data: any) {
     this.submitted = true;
-    this.apiService.postData('http://localhost:8081/api/v1/login', this.usersData.value).subscribe(data => {
-      console.log(data)
-      localStorage.setItem('user', JSON.stringify(data))
+    this._loginService.loginAuth(this.usersData.value).subscribe((data: any) => {
+      debugger;
+      this.errorMessage = null;
+      if (data['status'] === 200) {
+        console.log(data.body.user)
+        this._loginService.updateAuthStatus(true, data.body.user);
+        this.router.navigateByUrl('/admin-dashboard');
+      }
+      if (data['status'] === 206) {
+        this.tfaFlag = true;
+      }
+      
     })
-    if (this.usersData.invalid) {
-      console.log('email required');
-    }
-    else{
-      console.log('email valid');
-    }
-    console.log(this.usersData.value);
-
   }
+ 
+
 
 
 

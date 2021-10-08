@@ -17,6 +17,9 @@ export class ApiService {
   postData(url: any, data: any) {
     return this.http.post<any>(url, data)
   }
+  putData(url: any, data: any) {
+    return this.http.put<any>(url, data)
+  }
   sendData(save: any) {
     this.http.post<any>('https://reqres.in/api/posts', save).subscribe(data => {
       this.postId = data.id;

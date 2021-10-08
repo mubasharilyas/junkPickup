@@ -10,11 +10,11 @@ import { NgHttpLoaderModule } from 'ng-http-loader';
   styleUrls: ['./sign-up.component.scss']
 })
 export class SignUpComponent implements OnInit {
-  userForm:any = new FormGroup({
-    yourName: new FormControl('', [Validators.required]),
+  userForm: any = new FormGroup({
+    userName: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
     contactNumber: new FormControl('', [Validators.required]),
-    address: new FormControl(''),
+    address: new FormControl('',[Validators.required]),
     password: new FormControl(''),
     confirmPassword: new FormControl('', [Validators.required]),
   });
@@ -24,6 +24,7 @@ export class SignUpComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  registerd = false
   data = {
     customerName: '',
     email: '',
@@ -37,20 +38,29 @@ export class SignUpComponent implements OnInit {
   btnClick() {
     this.router.navigate(['/login']);
   }
-   onSubmit() {
-  
+  onSubmit() {
+
 
 
     console.log('userForm', this.userForm.value)
     {
       if (!this.userForm.invalid && (this.userForm.controls.confirmPassword.value == this.userForm.controls.password.value)) {
-        console.log('valid');
+        this.api.postData('http://localhost:8081/api/v1/signUp', this.userForm.value).subscribe(data => {
+          if (data.token) {
+            localStorage.setItem('user', JSON.stringify(data));
+            if (data.isAdmin) {
+              this.router.navigate(['/admin-dashboard']);
+            } else if (data) {
+              this.router.navigate(['/trash-upload']);
+
+            }
+          }
+        })
       }
-      else{
-        console.log('invalid');
-        // this.api.postData('http://localhost:8081/api/v1/signUp', this.data)
+      else {
+        console.log('invalid')
       }
-      
+
     }
   }
   passwordType = "password"

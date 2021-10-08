@@ -9,20 +9,17 @@ import { NgxSpinnerService } from "ngx-spinner";
   styleUrls: ['./trash-upload.component.scss']
 })
 export class TrashUploadComponent implements OnInit, AfterViewInit {
-  @ViewChild('upload') input: any;
 
   @Output() getPicture = new EventEmitter<WebcamImage>();
   showWebcam = false;
   isCameraExist = true;
   ImageBaseData: any;
   uploader: any;
+  uploaded = false
   button: any;
   errors: WebcamInitError[] = [];
-  upload = {
-    image: "", category: 'TV', numberOfItems: 1, fileName: '', userId: 6
-
-  }
-
+ 
+  public junkFormDat = { image: "", category: '', numberOfItems: '', fileName: '', userId: 0 }
   private trigger: Subject<void> = new Subject<void>();
   private nextWebcam: Subject<boolean | string> = new Subject<boolean | string>();
 
@@ -42,12 +39,12 @@ export class TrashUploadComponent implements OnInit, AfterViewInit {
     let me = this
     this.uploader.addEventListener("change", function () {
       var reader = new FileReader()
-      me.upload.fileName = me.uploader.files[0].name
+      me.junkFormDat.fileName = me.uploader.files[0].name
       reader.readAsDataURL(me.uploader.files[0])
       reader.onload = function () {
 
         me.ImageBaseData = reader.result;
-        me.upload.image = me.ImageBaseData
+         me.junkFormDat.image = me.ImageBaseData
       };
       reader.onerror = function (error) {
         console.log('Error: ', error);
@@ -61,10 +58,10 @@ export class TrashUploadComponent implements OnInit, AfterViewInit {
   ngOnInit():
     void {
     WebcamUtil.getAvailableVideoInputs()
-      .then((mediaDevices: MediaDeviceInfo[]) => { 
+      .then((mediaDevices: MediaDeviceInfo[]) => {
         this.isCameraExist = mediaDevices && mediaDevices.length > 0;
       });
-      setTimeout(() => {
+    setTimeout(() => {
       this.spinner.show();
     }, 5000);
 
@@ -77,7 +74,7 @@ export class TrashUploadComponent implements OnInit, AfterViewInit {
   }
 
 
-  takeSnapshot(): void { 
+  takeSnapshot(): void {
     this.trigger.next();
     this.showWebcam = false;
   }
@@ -101,7 +98,7 @@ export class TrashUploadComponent implements OnInit, AfterViewInit {
     reader.onload = function () {
 
       me.ImageBaseData = reader.result;
-      me.upload.image = me.ImageBaseData
+       me.junkFormDat.image = me.ImageBaseData
     };
     reader.onerror = function (error) {
       console.log('Error: ', error);
@@ -112,18 +109,21 @@ export class TrashUploadComponent implements OnInit, AfterViewInit {
   }
   btnUpload() {
     let user: any = localStorage.getItem('user')
+    user = JSON.parse(user)
+    this.junkFormDat.userId = user.id
+    // this.junkFormDat.userId = user.id
+    this.api.postData('http://localhost:8081/api/v1/createJunk', this.junkFormDat).subscribe(data => {
+      this.uploaded = data;
 
-    // this.upload.userId = user.id
-    this.api.postData('http://localhost:8081/api/v1/createJunk', this.upload).subscribe(data => {
       console.log(data)
     })
-    
-}
+
+  }
   handleImage(webcamImage: any) {
     console.log(webcamImage._imageAsDataUrl)
-    this.upload.image = webcamImage._imageAsDataUrl;
-    this.upload.fileName = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15) + '.png';
-    console.log('this.upload.fileName', this.upload.fileName)
+    this.junkFormDat.image = webcamImage._imageAsDataUrl;
+    this.junkFormDat.fileName = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15) + '.png';
+    console.log('this.junkFormDat.fileName', this.junkFormDat.fileName)
     this.showWebcam = false;
   }
 
