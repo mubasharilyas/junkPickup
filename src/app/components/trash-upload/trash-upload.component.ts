@@ -9,6 +9,13 @@ import { NgxSpinnerService } from "ngx-spinner";
   styleUrls: ['./trash-upload.component.scss']
 })
 export class TrashUploadComponent implements OnInit, AfterViewInit {
+  chackItem:any=[
+    {status:'',category:'',numberOfItems:'',}
+  ]; 
+chack:any=[ 
+];
+
+
   @ViewChild('upload') input: any;
 
   @Output() getPicture = new EventEmitter<WebcamImage>();

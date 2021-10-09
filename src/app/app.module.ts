@@ -18,6 +18,9 @@ import { NgxUiLoaderModule } from "ngx-ui-loader";
 import {  CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 // Import library module
 import { NgxSpinnerModule } from "ngx-spinner";
+import { CotactUsComponent } from './components/cotact-us/cotact-us.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
+import { OrderItemsComponent } from './components/order-items/order-items.component';
 
 
 
@@ -32,6 +35,9 @@ import { NgxSpinnerModule } from "ngx-spinner";
       CameraComponent,
 
     NavigationComponent,
+      CotactUsComponent,
+      AboutUsComponent,
+      OrderItemsComponent,
     
   ],
   imports: [

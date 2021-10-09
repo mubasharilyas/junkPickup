@@ -1,5 +1,5 @@
-<div class="body" >
-    
+<div class="body">
+
 
 
     <div class="wrapper" *ngIf="!showWebcam">
@@ -12,48 +12,102 @@
                 <li #upload id="upload" (click)="clickUpload()">
                     Select Image
                 </li>
-                
+
             </ul>
         </div>
+        <div class="box">
+            <div style="width: 100%; height: 150px; overflow-y: scroll;">
+                <table>
+                    <tr>
+                        <th>
 
-        <div class="sections">
+                        </th>
+                        <th>
 
-            <section class="active">
-                <input type="text" placeholder="numberOfItem" id="title" />
-                <select class="category">
-                    <option value="sofa">Sofa</option>
-                    <option value="printer">Printer</option>
-                    <option value="dinningTable">Dinning Table</option>
-                    <option value="boiler">Boiler</option>
-                    <option value="tv">Tv</option>
+                        </th>
+                        <th>
 
-                </select>
-
-            </section>
-
-
-
+                        </th>
+                    </tr>
+                    <tr>
+                        <td style="width: 10%;">
+                            <input type="checkbox" style="margin-left: 10px;"> 
+                        </td>
+                        <td style="width: 50%;">
+                            Mubsher ilyas
+                        </td>
+                        <td style="width: 50%;">
+                            <input type="text" style="width: 50%;margin-left: 45%;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="checkbox" style="margin-left: 10px;">
+                        </td>
+                        <td>
+                            Mubsher ilyas
+                        </td>
+                        <td>
+                            <input type="text" style="width: 50%;margin-left: 45%;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="checkbox" style="margin-left: 10px;">
+                        </td>
+                        <td style="width: 1%;">
+                            Mubsher ilyas
+                        </td>
+                        <td>
+                            <input type="text" style="width: 50%;margin-left: 45%;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="checkbox" style="margin-left: 10px;">
+                        </td>
+                        <td>
+                            Mubsher ilyas
+                        </td>
+                        <td>
+                            <input type="text" style="width: 50%;margin-left: 45%;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="checkbox" style="margin-left: 10px;">
+                        </td>
+                        <td>
+                            Mubsher ilyas
+                        </td>
+                        <td>
+                            <input type="text" style="width: 50%; margin-left: 45%;">
+                        </td>
+                    </tr>
+                </table>
+              
+            </div>
         </div>
 
         <footer>
-            <ul >
-               
+            <ul>
+
 
                 <button style="margin-left: 35%" (click)="btnUpload()" onclick="errorMessage()">Submit</button>
             </ul>
         </footer>
 
     </div>
-   
+
     <div class="camera-on" *ngIf="showWebcam">
         <div style="width:100%; margin: auto;">
             <input type="file" accept="image/*" capture="camera">
 
 
         </div>
-     
-       
-      
+
+
+
     </div>
     <div *ngIf="errors.length > 0">
         <h4>Error Messages:</h4>
@@ -61,8 +115,6 @@
             <li>{{ error | json }}</li>
         </ul>
     </div>
-    
-    <ngx-spinner></ngx-spinner>
+
 </div>
-
-
+<router-outlet></router-outlet>
