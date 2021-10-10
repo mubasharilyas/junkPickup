@@ -18,7 +18,7 @@ export class TrashUploadComponent implements OnInit, AfterViewInit {
   uploaded = false
   button: any;
   errors: WebcamInitError[] = [];
- 
+  categories: any = []
   public junkFormDat = { image: "", category: '', numberOfItems: '', fileName: '', userId: 0 }
   private trigger: Subject<void> = new Subject<void>();
   private nextWebcam: Subject<boolean | string> = new Subject<boolean | string>();
@@ -44,7 +44,7 @@ export class TrashUploadComponent implements OnInit, AfterViewInit {
       reader.onload = function () {
 
         me.ImageBaseData = reader.result;
-         me.junkFormDat.image = me.ImageBaseData
+        me.junkFormDat.image = me.ImageBaseData
       };
       reader.onerror = function (error) {
         console.log('Error: ', error);
@@ -55,16 +55,12 @@ export class TrashUploadComponent implements OnInit, AfterViewInit {
 
 
   }
-  ngOnInit():
-    void {
-    WebcamUtil.getAvailableVideoInputs()
-      .then((mediaDevices: MediaDeviceInfo[]) => {
-        this.isCameraExist = mediaDevices && mediaDevices.length > 0;
-      });
-    setTimeout(() => {
-      this.spinner.show();
-    }, 5000);
+  ngOnInit(): void {
 
+    this.api.getData('http://localhost:8081/api/v1/getAllCategories').subscribe((response: any) => {
+      this.categories = response
+
+    })
     // setTimeout(() => {
     //   /** spinner ends after 5 seconds */
     //   this.spinner.hide();
@@ -98,7 +94,7 @@ export class TrashUploadComponent implements OnInit, AfterViewInit {
     reader.onload = function () {
 
       me.ImageBaseData = reader.result;
-       me.junkFormDat.image = me.ImageBaseData
+      me.junkFormDat.image = me.ImageBaseData
     };
     reader.onerror = function (error) {
       console.log('Error: ', error);
