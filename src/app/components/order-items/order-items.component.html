@@ -1,0 +1,59 @@
+<div *ngIf="currrentUser.isAdmin && details" style="overflow-x: auto;">
+    
+
+    <table>
+        <tr>
+
+            <!-- <th style="width: 12%;">Picture</th> -->
+            <th style="width: 12%;">UserName</th>
+            <th style="width: 12%;">Category</th>
+            <th style="width: 12%;">address</th>
+            <th style="width: 12%;">Price</th>
+            <th style="width: 12%;">Status</th>
+            <Th style="width: 12%">Action</Th>
+
+
+        </tr>
+        <tr *ngFor="let item of details | paginate: { itemsPerPage: 10, currentPage: p }">
+            <td><img src="picture.jpG" style="height: 30px; width:30px"></td>
+            <td>{{item.userName}}</td>
+            <td>{{item.catagory}}</td>
+            <td>{{item.address}}</td>
+            <td><input [(ngModel)]="item.price" type="text" style="outline:none;" #task></td>
+            <td> <select name="cars" id="cars">
+                    <option *ngFor="let st of status" value="volvo">{{st}}</option>
+
+                </select></td>
+            <td><button (click)="saveData(task.value)">Update</button></td>
+        </tr>
+
+    </table>
+</div>
+
+<div  style="overflow-x: auto;">
+    <table>
+        <tr>
+
+            <th style="width: 12%;">Picture</th>
+            <th style="width: 12%;">Category</th>
+            <th style="width: 12%;">Items</th>
+            <th style="width: 12%;">Price</th>
+            <th style="width: 12%;">Status</th>
+
+
+        </tr>
+        <tr *ngFor="let item of details ">
+            <td><img [src]="item.imageUrl" style="height: 30px; width:30px"></td>
+            <td>{{item.catagory}}</td>
+            <td>{{item.numberOfItems}}</td>
+            <td>{{item.price}}</td>
+            <td>{{item.status}}</td>
+
+
+        </tr>
+
+    </table>
+</div>
+<div class="control">
+<pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+</div>
