@@ -5,12 +5,15 @@
     <div class="wrapper" *ngIf="!showWebcam">
         <header>
             <h1>Create</h1>
-        </header>
 
+        </header>
+        <div *ngIf="uploaded" class="alert alert-success">
+            <strong>Account created Successfuly</strong>
+        </div>
         <div class="ways">
             <ul>
                 <li #upload id="upload" (click)="clickUpload()">
-                    Select Image
+                    {{ junkFormDat.fileName? junkFormDat.fileName:'Select Image'}}
                 </li>
 
             </ul>
@@ -87,6 +90,8 @@
                 </table>
               
             </div>
+
+       
         </div>
 
         <footer>
@@ -116,5 +121,5 @@
         </ul>
     </div>
 
+
 </div>
-<router-outlet></router-outlet>

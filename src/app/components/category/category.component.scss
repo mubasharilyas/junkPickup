@@ -1,0 +1,44 @@
+table {
+  margin-top: 10%;
+  width: 80%;
+  margin-top: 30px;
+  font-size: 2px;
+  margin-left: auto;
+  margin-right: auto;
+  
+}
+th{
+  background-color:red;
+  font-size: 20px;
+  color: #fff;
+  text-align: center;
+}
+th,td{
+  text-align: center;
+  // padding: 1%;
+  width: auto;
+  border-collapse: collapse;
+
+  
+}
+td{
+
+  border-bottom: 1px solid #dddddd;
+  color: white;
+
+}
+button{
+  background-color:dodgerblue;
+  color: white;
+  outline: none;
+  height: 30px;
+  width: 60px;
+  font-size: 15px;
+  margin: 5px;
+}
+input{
+  height: 100%;
+  font-size: 20px;
+}
+
+ 

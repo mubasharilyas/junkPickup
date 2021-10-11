@@ -9,6 +9,7 @@ import { NgxSpinnerService } from "ngx-spinner";
   styleUrls: ['./trash-upload.component.scss']
 })
 export class TrashUploadComponent implements OnInit, AfterViewInit {
+
   chackItem:any=[
     {status:'',category:'',numberOfItems:'',}
   ]; 
@@ -18,18 +19,17 @@ chack:any=[
 
   @ViewChild('upload') input: any;
 
+
   @Output() getPicture = new EventEmitter<WebcamImage>();
   showWebcam = false;
   isCameraExist = true;
   ImageBaseData: any;
   uploader: any;
+  uploaded = false
   button: any;
   errors: WebcamInitError[] = [];
-  upload = {
-    image: "", category: 'TV', numberOfItems: 1, fileName: '', userId: 6
-
-  }
-
+  categories: any = []
+  public junkFormDat = { image: "", category: '', numberOfItems: '', fileName: '', userId: 0 }
   private trigger: Subject<void> = new Subject<void>();
   private nextWebcam: Subject<boolean | string> = new Subject<boolean | string>();
 
@@ -49,12 +49,12 @@ chack:any=[
     let me = this
     this.uploader.addEventListener("change", function () {
       var reader = new FileReader()
-      me.upload.fileName = me.uploader.files[0].name
+      me.junkFormDat.fileName = me.uploader.files[0].name
       reader.readAsDataURL(me.uploader.files[0])
       reader.onload = function () {
 
         me.ImageBaseData = reader.result;
-        me.upload.image = me.ImageBaseData
+        me.junkFormDat.image = me.ImageBaseData
       };
       reader.onerror = function (error) {
         console.log('Error: ', error);
@@ -65,16 +65,12 @@ chack:any=[
 
 
   }
-  ngOnInit():
-    void {
-    WebcamUtil.getAvailableVideoInputs()
-      .then((mediaDevices: MediaDeviceInfo[]) => { 
-        this.isCameraExist = mediaDevices && mediaDevices.length > 0;
-      });
-      setTimeout(() => {
-      this.spinner.show();
-    }, 5000);
+  ngOnInit(): void {
 
+    this.api.getData('http://localhost:8081/api/v1/getAllCategories').subscribe((response: any) => {
+      this.categories = response
+
+    })
     // setTimeout(() => {
     //   /** spinner ends after 5 seconds */
     //   this.spinner.hide();
@@ -84,7 +80,7 @@ chack:any=[
   }
 
 
-  takeSnapshot(): void { 
+  takeSnapshot(): void {
     this.trigger.next();
     this.showWebcam = false;
   }
@@ -108,7 +104,7 @@ chack:any=[
     reader.onload = function () {
 
       me.ImageBaseData = reader.result;
-      me.upload.image = me.ImageBaseData
+      me.junkFormDat.image = me.ImageBaseData
     };
     reader.onerror = function (error) {
       console.log('Error: ', error);
@@ -119,18 +115,21 @@ chack:any=[
   }
   btnUpload() {
     let user: any = localStorage.getItem('user')
+    user = JSON.parse(user)
+    this.junkFormDat.userId = user.id
+    // this.junkFormDat.userId = user.id
+    this.api.postData('http://localhost:8081/api/v1/createJunk', this.junkFormDat).subscribe(data => {
+      this.uploaded = data;
 
-    // this.upload.userId = user.id
-    this.api.postData('http://localhost:8081/api/v1/createJunk', this.upload).subscribe(data => {
       console.log(data)
     })
-    
-}
+
+  }
   handleImage(webcamImage: any) {
     console.log(webcamImage._imageAsDataUrl)
-    this.upload.image = webcamImage._imageAsDataUrl;
-    this.upload.fileName = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15) + '.png';
-    console.log('this.upload.fileName', this.upload.fileName)
+    this.junkFormDat.image = webcamImage._imageAsDataUrl;
+    this.junkFormDat.fileName = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15) + '.png';
+    console.log('this.junkFormDat.fileName', this.junkFormDat.fileName)
     this.showWebcam = false;
   }
 

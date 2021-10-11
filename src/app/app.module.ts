@@ -22,6 +22,11 @@ import { CotactUsComponent } from './components/cotact-us/cotact-us.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { OrderItemsComponent } from './components/order-items/order-items.component';
 
+import { CategoryComponent } from './components/category/category.component';
+import { AuthGuard } from './auth/auth.guard';
+import { CanActivate } from '@angular/router';
+import { AuthenticationService } from './services/authentication.service';
+
 
 
 @NgModule({
@@ -35,9 +40,11 @@ import { OrderItemsComponent } from './components/order-items/order-items.compon
       CameraComponent,
 
     NavigationComponent,
+
       CotactUsComponent,
       AboutUsComponent,
       OrderItemsComponent,
+      CategoryComponent,
     
   ],
   imports: [
@@ -53,7 +60,7 @@ import { OrderItemsComponent } from './components/order-items/order-items.compon
 
 
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },AuthGuard,AuthenticationService,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
