@@ -10,11 +10,13 @@ import { NgxSpinnerService } from "ngx-spinner";
 })
 export class TrashUploadComponent implements OnInit, AfterViewInit {
 
-  chackItem:any=[
-    {status:'',category:'',numberOfItems:'',}
-  ]; 
-chack:any=[ 
-];
+  chackItem: any = [
+    { status: '', category: '', numberOfItems: '', }
+  ];
+  items: any = [{
+    name: 'Sofa', price: 80, id: 1, numberOfItems: ''
+  }
+  ];
 
 
   @ViewChild('upload') input: any;
@@ -65,6 +67,13 @@ chack:any=[
 
 
   }
+  categoryToggle(cetegory: any, checked: boolean) {
+    if (checked) {
+      this.items.push({ categoryId: cetegory.id, ...cetegory, numberOfItems: '' });
+    } else {
+      this.items.splice(this.items.findIndex((item: any) => item.categoryId === cetegory.id), 1)
+    }
+  }
   ngOnInit(): void {
 
     this.api.getData('http://localhost:8081/api/v1/getAllCategories').subscribe((response: any) => {
@@ -80,45 +89,13 @@ chack:any=[
   }
 
 
-  takeSnapshot(): void {
-    this.trigger.next();
-    this.showWebcam = false;
-  }
-  onOffWebCame() {
-    this.showWebcam = true;
-  }
 
-  handleInitError(error: WebcamInitError) {
-    this.errors.push(error);
-  }
-
-  changeWebCame(directionOrDeviceId: boolean | string) {
-    this.nextWebcam.next(directionOrDeviceId);
-  }
-  handleFileInput(event: any) {
-    let me = this;
-    let file = event.target.files[0];
-    console.log("file", file)
-    let reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = function () {
-
-      me.ImageBaseData = reader.result;
-      me.junkFormDat.image = me.ImageBaseData
-    };
-    reader.onerror = function (error) {
-      console.log('Error: ', error);
-    };
-  }
-  goBack() {
-    this.showWebcam = false;
-  }
   btnUpload() {
     let user: any = localStorage.getItem('user')
     user = JSON.parse(user)
     this.junkFormDat.userId = user.id
     // this.junkFormDat.userId = user.id
-    this.api.postData('http://localhost:8081/api/v1/createJunk', this.junkFormDat).subscribe(data => {
+    this.api.postData('http://localhost:8081/api/v1/createOrder', { ...this.junkFormDat, items: this.items }).subscribe(data => {
       this.uploaded = data;
 
       console.log(data)
@@ -133,13 +110,7 @@ chack:any=[
     this.showWebcam = false;
   }
 
-  get triggerObservable(): Observable<void> {
-    return this.trigger.asObservable();
-  }
 
-  get nextWebcamObservable(): Observable<boolean | string> {
-    return this.nextWebcam.asObservable();
-  }
 
 
 

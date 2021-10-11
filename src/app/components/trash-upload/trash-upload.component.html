@@ -8,7 +8,7 @@
 
         </header>
         <div *ngIf="uploaded" class="alert alert-success">
-            <strong>Account created Successfuly</strong>
+            <strong>Order Created Successfuly</strong>
         </div>
         <div class="ways">
             <ul>
@@ -19,79 +19,45 @@
             </ul>
         </div>
         <div class="box">
-            <div style="width: 100%; height: 150px; overflow-y: scroll;">
+            <div style="width: 100%;  ">
                 <table>
                     <tr>
                         <th>
+                            Category
+                        </th>
 
+                        <th style="text-align: center;">
+                            Quantity
+                        </th>
+                        <th>
+                            Subtotal
                         </th>
                         <th>
 
                         </th>
-                        <th>
+                    </tr>
+                    <tr *ngFor="let item of items">
 
-                        </th>
-                    </tr>
-                    <tr>
-                        <td style="width: 10%;">
-                            <input type="checkbox" style="margin-left: 10px;"> 
+                        <td style="width: 45%;">
+                            {{item.name}}
                         </td>
-                        <td style="width: 50%;">
-                            Mubsher ilyas
+
+                        <td style="width: 30%;">
+                            <input type="text" [(ngModel)]="item.numberOfItems" style="width: 90%;margin: auto;">
                         </td>
-                        <td style="width: 50%;">
-                            <input type="text" style="width: 50%;margin-left: 45%;">
+                        <td style="width: 15%;">
+                            <span> {{item.price * item.numberOfItems}}</span>
                         </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="checkbox" style="margin-left: 10px;">
-                        </td>
-                        <td>
-                            Mubsher ilyas
-                        </td>
-                        <td>
-                            <input type="text" style="width: 50%;margin-left: 45%;">
+                        <td style="width: 5%;">
+                            <li class="fa fa-window-close" aria-hidden="true"></li>
                         </td>
                     </tr>
-                    <tr>
-                        <td>
-                            <input type="checkbox" style="margin-left: 10px;">
-                        </td>
-                        <td style="width: 1%;">
-                            Mubsher ilyas
-                        </td>
-                        <td>
-                            <input type="text" style="width: 50%;margin-left: 45%;">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="checkbox" style="margin-left: 10px;">
-                        </td>
-                        <td>
-                            Mubsher ilyas
-                        </td>
-                        <td>
-                            <input type="text" style="width: 50%;margin-left: 45%;">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="checkbox" style="margin-left: 10px;">
-                        </td>
-                        <td>
-                            Mubsher ilyas
-                        </td>
-                        <td>
-                            <input type="text" style="width: 50%; margin-left: 45%;">
-                        </td>
-                    </tr>
+
                 </table>
-              
+
             </div>
 
-       
+
         </div>
 
         <footer>
