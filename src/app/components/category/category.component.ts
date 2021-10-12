@@ -15,6 +15,9 @@ export class CategoryComponent implements OnInit {
   constructor(private api: ApiService) { }
 
   ngOnInit(): void {
+   this.getCategories()
+  }
+  getCategories(){
     this.api.getData('http://localhost:8081/api/v1/getAllCategories').subscribe((response: any) => {
       this.categories = response
 
@@ -26,12 +29,22 @@ export class CategoryComponent implements OnInit {
   }
   save(category: any) {
     this.api.postData('http://localhost:8081/api/v1/createCategory', category).subscribe(response => {
+      this.getCategories()
+
 
     })
   }
   onRemove(item: any, index: any) {
-    this.categories.splice(index, 1);
-    console.log(this.categories);
+    if (item.id) {
+      this.api.deleteRequest('http://localhost:8081/api/v1/deleteCategory?id=' + item.id).subscribe(res => {
+
+        console.log(res)
+        this.getCategories()
+
+      })
+    } else {
+      this.categories.splice(index, 1);
+    }
   }
 
 }

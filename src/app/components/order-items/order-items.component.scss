@@ -4,13 +4,8 @@ table {
     border: solid black 2px;
     margin-top: 50px;
     font-size: 2px;
-    margin-top: 100px;
 }
-th{
-    background-color:tomato;
-    font-size: 13px;
-    color: #fff;
-}
+
 th,td{
     text-align: left;
     padding: 1%;
@@ -18,10 +13,15 @@ th,td{
     border-collapse: collapse;
     
 }
-td{
+th{
+    background-color:tomato;
+    font-size:10px ;
 
+    color: #fff;
+}
+td{
+font-size: 4vh;
     border-bottom: 1px solid #dddddd;
-    color: white;
 }
 button{
     background-color:red;
@@ -37,9 +37,7 @@ select{
     width: 80%;
 }
 
-   tr:nth-child(even):hover{
-       background-color:gray ;
-   } 
+  
    .control{
        text-align: center;
        margin-top: 10px;

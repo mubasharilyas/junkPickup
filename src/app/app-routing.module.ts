@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: 'sign-up', component: SignUpComponent },
 
 
-  {path:'order-items',component:OrderItemsComponent},
+  {path:'order-items/:orderId',component:OrderItemsComponent},
 
 
   {path:'category',component:CategoryComponent},

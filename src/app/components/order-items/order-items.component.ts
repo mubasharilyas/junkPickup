@@ -1,18 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
+import { Router, ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-order-items',
   templateUrl: './order-items.component.html',
   styleUrls: ['./order-items.component.scss']
 })
-export class OrderItemsComponent implements OnInit {
+export class OrderItemsComponent implements OnInit, OnDestroy {
   collection: any;
   p: number = 1;
 
+  id: number | undefined;
+  private sub: any;
 
-  
- 
+
   details: any = [
 
     {
@@ -24,8 +26,8 @@ export class OrderItemsComponent implements OnInit {
       price: '350'
     }
   ];
-  currrentUser: any ={isAdmin:false};
-  constructor(public api: ApiService) {
+  currrentUser: any = { isAdmin: false };
+  constructor(public api: ApiService, private route: ActivatedRoute) {
   }
 
   status = ['inprogress', 'Completed', 'contacted the user', 'need to contact customer price', 'approved']
@@ -39,21 +41,24 @@ export class OrderItemsComponent implements OnInit {
 
 
   ngOnInit(): void {
-    // this.currrentUser= localStorage.getItem('user')
-    // this.currrentUser = JSON.parse(this.currrentUser)
-    // this.getAllData();
+    this.sub = this.route.params.subscribe(params => {
+      this.id = +params['orderId'];
+      this.getAllData()
+      console.log(this.id)
+    }
+    )
   }
-  
 
-getAllData() {
-  
-  console.log(this.currrentUser)
-  // this.api.getData('http://localhost:8081/api/v1/getJunksByUser?userId=' + this.currrentUser.id).subscribe(data => {
-  //   this.details = data;
-  //   console.log(this.details)
-  // }
-  // )
 
-}
+  getAllData() {
+
+    this.api.postData('http://localhost:8081/api/v1/getOrderItemsById', { orderId: this.id, paginationData: {} }).subscribe(data => {
+      this.details = data;
+      console.log(this.details)
+    }
+    )
+
+  }
+  ngOnDestroy() { this.sub.unsubscribe(); }
 }
 

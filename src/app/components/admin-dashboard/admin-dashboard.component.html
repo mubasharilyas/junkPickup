@@ -1,30 +1,32 @@
-<div *ngIf="currrentUser.isAdmin && details" style="overflow-x: auto;">
+<div *ngIf=" details" style="overflow-x: auto;">
 
 
     <table>
         <tr>
 
-            <th style="width: 12%;">Picture</th>
-            <th style="width: 12%;">Customer</th>
-            <th style="width: 12%;">Category</th>
-            <th style="width: 12%;">Address</th>
-            <th style="width: 12%;">Price</th>
-            <th style="width: 12%;">Status</th>
-            <Th style="width: 12%">Action</Th>
+            <th style="width: 12%;">Order #</th>
+            <th style="width: 20%;">Customer</th>
+            <th style="width: 10%;">Total</th>
+            <th style="width: 10%;">Date</th>
+            <th style="width: 10%;">Status</th>
+            <Th style="width: 10%">Action</Th>
 
 
         </tr>
         <tr *ngFor="let item of details | paginate: { itemsPerPage: 10, currentPage: p }">
-            <td><img [src]="item.imageUrl" style="height: 30px; width:30px"></td>
-            <td>{{item.userName}}</td>
-            <td>{{item.category}}</td>
-            <td>{{item.address}}</td>
-            <td><input [(ngModel)]="item.price" type="text" style="outline:none;" #task></td>
-            <td> <select name="cars" id="cars" [(ngModel)]="item.status">
+            <td>{{item.id}}</td>
+            <td><span><b>{{item.userName}}</b></span><br>
+                <span>{{item.contactNumber}}</span><br>
+                <span>{{item.email}}</span><br>
+                <span>{{item.address}}</span>
+            </td>
+            <td>{{item.total}}</td>
+            <td>{{toLocalDate(item.createdAt)}}</td>
+            <td> <select name="cars" id="cars" [(ngModel)]="item.status" (change)="updateJunk(item)">
                     <option *ngFor="let st of status" [value]="st">{{st}}</option>
 
                 </select></td>
-            <td><button (click)="updateJunk(item)">Update</button></td>
+            <td><button (click)="viewDetails(item.id)">View Details</button></td>
         </tr>
 
     </table>
@@ -36,7 +38,7 @@
 
 
 
-<div style="overflow-x: auto;" *ngIf="!currrentUser.isAdmin && details">
+<div style="overflow-x: auto;" *ngIf="currrentUser.isAdmin && details">
     <table>
         <tr>
 

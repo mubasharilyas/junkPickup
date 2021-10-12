@@ -5,17 +5,19 @@ table {
     margin-top: 50px;
     font-size: 2px;
 }
-th{
-    background-color:tomato;
-    font-size: 13px;
-    color: #fff;
-}
+
 th,td{
     text-align: left;
     padding: 1%;
     width: auto;
     border-collapse: collapse;
     
+}
+th{
+    background-color:tomato;
+    font-size:10px ;
+
+    color: #fff;
 }
 td{
 font-size: 4vh;
