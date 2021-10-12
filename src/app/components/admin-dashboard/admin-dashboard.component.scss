@@ -1,43 +1,72 @@
-table {
-    width: 100%;
-    border-collapse: collapse;
-    border: solid black 2px;
-    margin-top: 50px;
-    font-size: 2px;
-}
-th{
-    background-color:tomato;
-    font-size: 13px;
-    color: #fff;
-}
-th,td{
-    text-align: left;
-    padding: 1%;
-    width: auto;
-    border-collapse: collapse;
+// table {
+//     width: 100%;
+//     border-collapse: collapse;
+//     border: solid black 2px;
+//     margin-top: 50px;
+//     font-size: 2px;
+
     
-}
-td{
-font-size: 4vh;
-    border-bottom: 1px solid #dddddd;
-}
-button{
-    background-color:red;
-    color: white;
-    outline: none;
-}
-input{
-    height: 100%;
-    width: 80%;
+// }
+// th{
+//     background-color:tomato;
+//     font-size: 13px;
+//     color: #fff;
+// }
+// th,td{
+//     text-align: left;
+//     padding: 1%;
+//     width: auto;
+//     border-collapse: collapse;
+
     
-}
-select{
-    width: 80%;
-}
+// }
+// td{
+// font-size: 4vh;
+//     border-bottom: 1px solid #dddddd;
+// }
+// button{
+//     background-color:red;
+//     color: white;
+//     outline: none;
+// }
+// input{
+//     height: 100%;
+//     width: 80%;
+    
+// }
+// select{
+//     width: 80%;
+// }
 
   
-   .control{
-       text-align: center;
-       margin-top: 10px;
-       color: blue;
-   }
+//    .control{
+//        text-align: center;
+//        margin-top: 10px;
+//        color: blue;
+//    }
+// h2 {
+//     text-align: center;
+//     padding: 20px 0;
+//   }
+  
+  .table-bordered {
+    border: 1px solid #ddd !important;
+
+  }
+  
+  table caption {
+      padding: .5em 0;
+    
+  }
+  
+  @media screen and (max-width: 767px) {
+    table caption {
+      display: none;
+    }
+  }
+  
+  .p {
+    text-align: center;
+    padding-top: 40px;
+    font-size: 14px;
+  }

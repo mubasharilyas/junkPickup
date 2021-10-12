@@ -17,7 +17,7 @@ export class AdminDashboardComponent implements OnInit {
 
 
   details: any = [
-
+    { userName: 'test', }
 
 
   ];

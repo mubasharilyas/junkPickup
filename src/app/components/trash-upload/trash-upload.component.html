@@ -18,27 +18,40 @@
 
             </ul>
         </div>
+        <section class="active">
+            <div class="address-item">
+                <div class="actions-area">
 
-        <div class="sections">
+                    <div class="dropdown">
+                        <a style="width: 100% ;background-color: #7FE3E8;height: 50px;"
+                            class="dropdown-toggle btn btn-sm btn-success" 
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actions
+                        </a>
+                        <div (click)="false" class="dropdown-menu dropdown-menu-right show" aria-labelledby="dropdownMenuButton"
+                            style="width:100%;">
 
-            <section class="active">
-                <select class="category"  [(ngModel)]="junkFormDat.category">
-                    <option value="" disabled>Select Category</option>
+                            <div class="icon" >
+                                <div class="dropdown-item" style="width:100%">
+                                    <span class="box"><input type="checkbox" name="checkbbox"
+                                            style="width: 10%;display: inline;"><span class="text"
+                                            style="margin-left: 10px;">Delayed</span><label
+                                            style="margin-left: 10px; float: right;"><b>$50</b></label></span>
+                                </div>
+                            </div>
 
-                    <option value="sofa">Sofa</option>
-                    <option value="printer">Printer</option>
-                    <option value="dinningTable">Dinning Table</option>
-                    <option value="boiler">Boiler</option>
-                    <option value="tv">Tv</option>
-
-                </select>
-                <input type="text" placeholder="Number of Items" id="title" [(ngModel)]="junkFormDat.numberOfItems" />
-
-            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
 
 
-        </div>
+
+
+
+
+
 
         <footer>
             <ul>
