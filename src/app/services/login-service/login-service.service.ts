@@ -41,7 +41,8 @@ export class LoginServiceService {
   }
   getUserStatus() {
     let user: any = localStorage.getItem('user')
-    return JSON.parse(user)
+    console.log(user)
+    return user ? JSON.parse(user) : null
   }
   logoutUser() {
     this._isLoggedIn = false;

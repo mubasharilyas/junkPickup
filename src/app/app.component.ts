@@ -3,6 +3,7 @@ import { WebcamImage } from 'ngx-webcam';
 import { ApiService } from './services/api.service';
 import { HttpClient } from '@angular/common/http';
 import { NgxSpinnerService } from "ngx-spinner";
+import { Router, NavigationStart } from "@angular/router";
 
 // import {Component} from '@angular/core';
 import { Subject } from 'rxjs';
@@ -19,8 +20,13 @@ export class AppComponent implements OnInit {
 
 
 
-  constructor(public api: ApiService, public http: HttpClient,private spinner: NgxSpinnerService) {
+  constructor(public api: ApiService, public http: HttpClient, private spinner: NgxSpinnerService, private router: Router) {
+    router.events.subscribe(event => {
+      if (event instanceof NavigationStart && !event.url.includes('order-items/')) {
+        this.api.updatePaginationSub({ page: 1 })
 
+      }
+    });
   }
   title = 'junkPickup';
   ngOnInit() {

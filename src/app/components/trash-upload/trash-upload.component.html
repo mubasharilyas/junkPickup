@@ -8,7 +8,7 @@
 
         </header>
         <div *ngIf="uploaded" class="alert alert-success">
-            <strong>Account created Successfuly</strong>
+            <strong>Order Created Successfuly</strong>
         </div>
         <div class="ways">
             <ul>
@@ -18,6 +18,7 @@
 
             </ul>
         </div>
+
         <section class="active">
             <div class="address-item">
                 <div class="actions-area">
@@ -51,6 +52,45 @@
 
 
 
+        <div class="box">
+            <div style="width: 100%;  ">
+                <table>
+                    <tr>
+                        <th>
+                            Category
+                        </th>
+
+                        <th style="text-align: center;">
+                            Quantity
+                        </th>
+                        <th>
+                            Subtotal
+                        </th>
+                        <th>
+
+                        </th>
+                    </tr>
+                    <tr *ngFor="let item of items">
+
+                        <td style="width: 45%;">
+                            {{item.name}}
+                        </td>
+
+                        <td style="width: 30%;">
+                            <input type="text" [(ngModel)]="item.numberOfItems" style="width: 90%;margin: auto;">
+                        </td>
+                        <td style="width: 15%;">
+                            <span> {{item.price * item.numberOfItems}}</span>
+                        </td>
+                        <td style="width: 5%;">
+                            <li class="fa fa-window-close" aria-hidden="true"></li>
+                        </td>
+                    </tr>
+
+                </table>
+
+            </div>
+
 
 
         <footer>
@@ -79,5 +119,6 @@
             <li>{{ error | json }}</li>
         </ul>
     </div>
+
 
 </div>

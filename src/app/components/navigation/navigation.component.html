@@ -27,6 +27,9 @@
         <ul>
             <li *ngIf="isLoggedIn" ><a routerLink="/admin-dashboard">Dashboard</a></li>
 
+
+
+
             <li *ngIf=" isLoggedIn && user && !user.isAdmin" ><a routerLink="/trash-upload" >Create Trash</a></li><br>
 
             <li><a routerLink="/category">Category</a></li>

@@ -8,22 +8,43 @@ import { FormBuilder, FormControl, FormControlName, FormGroup, Validators } from
   styleUrls: ['./category.component.scss']
 })
 export class CategoryComponent implements OnInit {
-  categoryName:any=[
-    {category:'',price:''}
+  categories: any = [
   ];
 
 
-  constructor() { }
+  constructor(private api: ApiService) { }
 
   ngOnInit(): void {
+   this.getCategories()
   }
-  addNew(name:any){
-    this.categoryName.push({category:'',price:''});
-    console.log(this.categoryName);
+  getCategories(){
+    this.api.getData('http://localhost:8081/api/v1/getAllCategories').subscribe((response: any) => {
+      this.categories = response
+
+    })
   }
-  onRemove(item:any){
-    this.categoryName.splice(item,1);
-    console.log(this.categoryName);
+  addNew() {
+    this.categories.push({ name: '', price: '' });
+    console.log(this.categories);
+  }
+  save(category: any) {
+    this.api.postData('http://localhost:8081/api/v1/createCategory', category).subscribe(response => {
+      this.getCategories()
+
+
+    })
+  }
+  onRemove(item: any, index: any) {
+    if (item.id) {
+      this.api.deleteRequest('http://localhost:8081/api/v1/deleteCategory?id=' + item.id).subscribe(res => {
+
+        console.log(res)
+        this.getCategories()
+
+      })
+    } else {
+      this.categories.splice(index, 1);
+    }
   }
 
 }
