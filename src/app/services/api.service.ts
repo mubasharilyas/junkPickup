@@ -7,7 +7,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class ApiService {
-  paginationSub = new BehaviorSubject({ page: 1 });
+  paginationSub = new BehaviorSubject({ page: 1});
 
   constructor(private http: HttpClient) { }
   displayVal: any;

@@ -35,9 +35,7 @@ export class AdminDashboardComponent implements OnInit {
     this.p = event
     this.api.updatePaginationSub({ page: event })
   }
-  saveData(item: any) {
-    console.log(item)
-  }
+ 
   public viewDetails(orderId: any) {
     this.router.navigate(['/order-items', orderId]);
   }
