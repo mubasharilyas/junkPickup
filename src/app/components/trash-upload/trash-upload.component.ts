@@ -13,9 +13,7 @@ export class TrashUploadComponent implements OnInit, AfterViewInit {
   chackItem: any = [
     { status: '', category: '', numberOfItems: '', }
   ];
-  items: any = [{
-    name: 'Sofa', price: 80, id: 1, numberOfItems: ''
-  }
+  items: any = [
   ];
 
 
@@ -31,7 +29,7 @@ export class TrashUploadComponent implements OnInit, AfterViewInit {
   button: any;
   errors: WebcamInitError[] = [];
   categories: any = []
-  public junkFormDat = { image: "", category: '', numberOfItems: '', fileName: '', userId: 0 }
+  public junkFormDat = { image: "",  fileName: '', userId: 0 }
   private trigger: Subject<void> = new Subject<void>();
   private nextWebcam: Subject<boolean | string> = new Subject<boolean | string>();
 
@@ -67,17 +65,21 @@ export class TrashUploadComponent implements OnInit, AfterViewInit {
 
 
   }
-  categoryToggle(cetegory: any, checked: boolean) {
-    if (checked) {
-      this.items.push({ categoryId: cetegory.id, ...cetegory, numberOfItems: '' });
+  categoryToggle(category: any, target: any, index: Number) {
+    console.log(category, target.checked)
+    if (target.checked) {
+      this.items.push({ categoryId: category.id, ...category });
     } else {
-      this.items.splice(this.items.findIndex((item: any) => item.categoryId === cetegory.id), 1)
+      this.items.splice(index, 1)
     }
   }
   ngOnInit(): void {
 
     this.api.getData('http://localhost:8081/api/v1/getAllCategories').subscribe((response: any) => {
-      this.categories = response
+      this.categories = response.map((cat: any) => {
+        cat.numberOfItems = '';
+        return cat
+      })
 
     })
     // setTimeout(() => {

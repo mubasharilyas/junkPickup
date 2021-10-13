@@ -14,8 +14,9 @@ export class AdminDashboardComponent implements OnInit {
   p: number = 1;
 
 
-  paginationDat: any = { page: 1 }
-
+  paginationData: any = { page: 1 }
+  searchProperty = '';
+  searchValue = ''
   details: any = [
     { userName: 'test', }
 
@@ -35,7 +36,7 @@ export class AdminDashboardComponent implements OnInit {
     this.p = event
     this.api.updatePaginationSub({ page: event })
   }
- 
+
   public viewDetails(orderId: any) {
     this.router.navigate(['/order-items', orderId]);
   }
@@ -49,14 +50,24 @@ export class AdminDashboardComponent implements OnInit {
     this.currrentUser = this._loginService.getUserStatus()
     this.api.paginationSub.subscribe((data: any) => {
       console.log(data)
-      this.paginationDat = data;
+      this.paginationData = data;
       this.getAllData();
     })
   }
+  updateSearch() {
+    this.paginationData.search = { property: this.searchProperty, value: this.searchValue }
+    this.api.updatePaginationSub(this.paginationData)
+  }
+  clearSearch() {
+    this.searchProperty = '';
+    this.searchValue = ''
 
+    this.paginationData.search = null;
+    this.api.updatePaginationSub(this.paginationData)
+  }
   getAllData() {
     let url = this.currrentUser && !this.currrentUser.isAdmin ? 'http://localhost:8081/api/v1/getJunksByAdmin' : 'http://localhost:8081/api/v1/getJunksByUser?userId=' + this.currrentUser.id
-    this.api.postData(url, this.paginationDat).subscribe(data => {
+    this.api.postData(url, this.paginationData).subscribe(data => {
       this.details = data;
       console.log(this.details)
     }

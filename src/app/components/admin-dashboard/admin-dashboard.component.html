@@ -1,16 +1,24 @@
+<div *ngIf=" details" style="overflow-x: auto;  margin-top: 70px;
+">
+    <div class="row">
+        <select class="col-md-3" [(ngModel)]="searchProperty">
+            <option value="" selected disabled>Search By</option>
 
-<div *ngIf=" details" style="overflow-x: auto;">
+            <option value="u.userName">Customer Name</option>
+            <option value="ord.status">Order Status</option>
+            <option value="c.name">Category</option>
+            <option value="u.address">Address </option>
+            <option value="DATE(ord.createdAt)">Order Date</option>
 
-<p class="p">Demo by George Martsoukos. <a href="http://www.sitepoint.com/responsive-data-tables-comprehensive-list-solutions" target="_blank">See article</a>.</p>
-        <!-- <tr>
-            <th style="width: 12.5%;">Order No</th>
-            <th style="width: 12.5%;">Customer</th>
-            <th style="width: 12.5%;">Phone No</th>
+        </select>
+        <input *ngIf="searchProperty != 'DATE(ord.createdAt)'" type="text" [(ngModel)]="searchValue" class="col-md-3-offset col-md-3">
+        <input *ngIf="searchProperty == 'DATE(ord.createdAt)'" type="date" [(ngModel)]="searchValue" class="col-md-3-offset col-md-3">
+        <button class="col-md-6-offset col-md-1" (click)="updateSearch()">Search</button>
+        <button class="col-md-7-offset col-md-1" (click)="clearSearch()">Clear</button>
 
-            <th style="width: 12.5%;">Address</th>
-            <th style="width: 12.5%;">Items</th>
-            <Th style="width: 12.5%">Total</Th>
-
+    </div>
+    <table>
+        <tr>
 
             <th style="width: 12%;">Order #</th>
             <th style="width: 20%;">Customer</th>
@@ -20,9 +28,8 @@
             <Th style="width: 10%">Action</Th>
 
 
-        </tr> -->
+        </tr>
         <tr *ngFor="let item of details | paginate: { itemsPerPage: 10, currentPage: p }">
-
             <td>{{item.id}}</td>
             <td><span><b>{{item.userName}}</b></span><br>
                 <span>{{item.contactNumber}}</span><br>

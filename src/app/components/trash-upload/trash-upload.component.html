@@ -19,33 +19,7 @@
             </ul>
         </div>
 
-        <section class="active">
-            <div class="address-item">
-                <div class="actions-area">
-
-                    <div class="dropdown">
-                        <a style="width: 100% ;background-color: #7FE3E8;height: 50px;"
-                            class="dropdown-toggle btn btn-sm btn-success" 
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actions
-                        </a>
-                        <div (click)="false" class="dropdown-menu dropdown-menu-right show" aria-labelledby="dropdownMenuButton"
-                            style="width:100%;">
-
-                            <div class="icon" >
-                                <div class="dropdown-item" style="width:100%">
-                                    <span class="box"><input type="checkbox" name="checkbbox"
-                                            style="width: 10%;display: inline;"><span class="text"
-                                            style="margin-left: 10px;">Delayed</span><label
-                                            style="margin-left: 10px; float: right;"><b>$50</b></label></span>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
+       
 
 
 
@@ -53,51 +27,52 @@
 
 
         <div class="box">
-            <div style="width: 100%;  ">
+            <div style="width: 100%; padding-bottom: 5px ">
                 <table>
                     <tr>
+                        <th></th>
                         <th>
                             Category
                         </th>
-
+                        <th style="text-align: center;">
+                            Price
+                        </th>
                         <th style="text-align: center;">
                             Quantity
                         </th>
-                        <th>
+                        <th style="text-align: center;">
                             Subtotal
                         </th>
-                        <th>
-
-                        </th>
+                       
                     </tr>
-                    <tr *ngFor="let item of items">
-
+                    <tr  *ngFor="let item of categories; index as i">
+                        <td > <input type="checkbox"  (change)="categoryToggle(item,$event.target,i)"></td>
                         <td style="width: 45%;">
                             {{item.name}}
                         </td>
-
-                        <td style="width: 30%;">
-                            <input type="text" [(ngModel)]="item.numberOfItems" style="width: 90%;margin: auto;">
+                        <td style="width: 10%;">
+                            {{item.price}}
                         </td>
-                        <td style="width: 15%;">
+                        <td style="width: 30%;">
+                            <input type="text" [(ngModel)]="item.numberOfItems"  style="width: 100%;margin: auto;">
+                        </td>
+                        <td style="width: 15%;text-align: center;">
                             <span> {{item.price * item.numberOfItems}}</span>
                         </td>
-                        <td style="width: 5%;">
-                            <li class="fa fa-window-close" aria-hidden="true"></li>
-                        </td>
+                       
                     </tr>
 
                 </table>
 
             </div>
 
-
+        </div>
 
         <footer>
             <ul>
 
 
-                <button style="margin-left: 35%" (click)="btnUpload()" onclick="errorMessage()">Submit</button>
+                <button style="margin-left: 35%" (click)="btnUpload()" >Submit</button>
             </ul>
         </footer>
 
