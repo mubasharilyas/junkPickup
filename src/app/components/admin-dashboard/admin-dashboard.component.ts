@@ -17,7 +17,7 @@ export class AdminDashboardComponent implements OnInit {
   paginationDat: any = { page: 1 }
 
   details: any = [
-
+    { userName: 'test', }
 
 
   ];

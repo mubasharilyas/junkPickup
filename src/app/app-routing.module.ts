@@ -4,6 +4,7 @@ import { LoginComponent } from './components/login/login.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { TrashUploadComponent } from './components/trash-upload/trash-upload.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
+
 import { OrderItemsComponent } from './components/order-items/order-items.component';
 
 import { CategoryComponent } from './components/category/category.component';
@@ -21,7 +22,8 @@ const routes: Routes = [
 
   {path:'category',component:CategoryComponent},
   { path: 'trash-upload', component: TrashUploadComponent },
-  { path: 'admin-dashboard', component: AdminDashboardComponent, canActivate: [AuthGuardGuard] }
+  { path: 'admin-dashboard', component: AdminDashboardComponent }
+
 ];
 
 @NgModule({
