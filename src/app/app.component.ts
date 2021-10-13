@@ -22,8 +22,8 @@ export class AppComponent implements OnInit {
 
   constructor(public api: ApiService, public http: HttpClient, private spinner: NgxSpinnerService, private router: Router) {
     router.events.subscribe(event => {
-      if (event instanceof NavigationStart && !event.url.includes('order-items/')) {
-        this.api.updatePaginationSub({ page: 1 })
+      if (event instanceof NavigationStart && !event.url.includes('order-items/') && !event.url.includes('admin-dashboard')) {
+        this.api.updatePaginationSub({ page: 1 , search: { property:'c.name',value:'Sofa'} })
 
       }
     });

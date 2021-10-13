@@ -13,7 +13,7 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
 
   id: number | undefined;
   private sub: any;
-
+  search: any;
 
   details: any = [
 
@@ -41,6 +41,10 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
+    this.api.paginationSub.subscribe((data: any) => {
+      console.log(data)
+      this.search = data.search;
+    })
     this.sub = this.route.params.subscribe(params => {
       this.id = +params['orderId'];
       this.getAllData()
@@ -52,7 +56,7 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
 
   getAllData() {
 
-    this.api.postData('http://localhost:8081/api/v1/getOrderItemsById', { orderId: this.id, paginationData: {} }).subscribe(data => {
+    this.api.postData('http://localhost:8081/api/v1/getOrderItemsById', { orderId: this.id, search: this.search }).subscribe(data => {
       this.details = data;
       console.log(this.details)
     }
