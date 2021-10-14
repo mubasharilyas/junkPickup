@@ -1,4 +1,63 @@
-<div *ngIf=" details" style="overflow-x: auto;  margin-top: 70px;
+<div class="table-users">
+    <div class="header">Users</div>
+    
+    <table cellspacing="0">
+       <tr>
+        <th >Order #</th>
+        <th >Customer</th>
+        <th >Total</th>
+        <th >Date</th>
+        <th >Status</th>
+        <Th >Action</Th>
+          <!-- <th>Order No</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th width="230">Comments</th>
+                   <th>Action</th>
+ <th>Action 2</th> -->
+       </tr>
+ 
+       <tr>
+          <td>10</td>
+          <td>Jane Doe</td>
+          <td>jane.doe@foo.com</td>
+          <td>01 800 2000</td>
+          <td>mubasharbhatti485@foo.com sit amet, consectetur adipisicing elit. </td>
+                   <td>Action</td>
+          <td>Action</td>
+ 
+       </tr>
+ 
+       <tr>
+          <td>20</td>
+          <td>John Doe</td>
+          <td>john.doe@foo.com</td>
+          <td>01 800 2000</td>
+          <td>Blanditiis, aliquid numquam iure voluptatibus ut maiores explicabo ducimus neque, nesciunt rerum perferendis, inventore.</td>
+ 
+       </tr>
+ 
+       <tr>
+          <td>30</td>
+          <td>Jane Smith</td>
+          <td>jane.smith@foo.com</td>
+          <td>01 800 2000</td>
+          <td> Culpa praesentium unde pariatur fugit eos recusandae voluptas.</td>
+       </tr>
+       
+       <tr>
+          <td>40</td>
+          <td>John Smith</td>
+          <td>john.smith@foo.com</td>
+          <td>01 800 2000</td>
+          <td>Aut voluptatum accusantium, eveniet, sapiente quaerat adipisci consequatur maxime temporibus quas, dolorem impedit.</td>
+       </tr>
+    </table>
+ </div>
+
+
+<!-- <div *ngIf=" details" style="overflow-x: auto;  margin-top: 70px;
 ">
     <div class="row">
         <select class="col-md-3" [(ngModel)]="searchProperty">
@@ -29,7 +88,7 @@
 
 
         </tr>
-        <tr *ngFor="let item of details | paginate: { itemsPerPage: 10, currentPage: p }">
+        <tr *ngFor="let item of details | paginate: { itemsPerPage: 3, currentPage: p,totalItems: 4 }">
             <td>{{item.id}}</td>
             <td><span><b>{{item.userName}}</b></span><br>
                 <span>{{item.contactNumber}}</span><br>
@@ -80,4 +139,4 @@
 </div>
 <div class="control">
     <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
-</div>
+</div> -->
