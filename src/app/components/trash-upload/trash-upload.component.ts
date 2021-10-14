@@ -3,6 +3,8 @@ import { WebcamImage, WebcamInitError, WebcamUtil } from 'ngx-webcam';
 import { Observable, Subject } from 'rxjs';
 import { ApiService } from '../../services/api.service';
 import { NgxSpinnerService } from "ngx-spinner";
+import { ToastrService } from 'ngx-toastr';
+
 @Component({
   selector: 'app-trash-upload',
   templateUrl: './trash-upload.component.html',
@@ -29,11 +31,12 @@ export class TrashUploadComponent implements OnInit, AfterViewInit {
   button: any;
   errors: WebcamInitError[] = [];
   categories: any = []
-  public junkFormDat = { image: "",  fileName: '', userId: 0 }
+  public junkFormDat = { image: "", fileName: '', userId: 0 }
   private trigger: Subject<void> = new Subject<void>();
   private nextWebcam: Subject<boolean | string> = new Subject<boolean | string>();
 
-  constructor(public api: ApiService, private spinner: NgxSpinnerService) {
+  constructor(public api: ApiService, private toastr: ToastrService,
+    private spinner: NgxSpinnerService) {
 
   }
   ngAfterViewInit(): void {
@@ -99,8 +102,15 @@ export class TrashUploadComponent implements OnInit, AfterViewInit {
     // this.junkFormDat.userId = user.id
     this.api.postData('http://localhost:8081/api/v1/createOrder', { ...this.junkFormDat, items: this.items }).subscribe(data => {
       this.uploaded = data;
-
       console.log(data)
+      if (data.errorMessage){
+        this.toastr.error(data.errorMessage);
+
+      }else if(data.success){
+        this.toastr.success('Order created successfully');
+
+      }
+        console.log(data)
     })
 
   }

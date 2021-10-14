@@ -8,6 +8,12 @@
 						style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; color: blue;">
 						Login
 					</span>
+					<div *ngIf="response && response.infoMessage" class="alert alert-info ">
+						{{response.infoMessage}}
+					</div>
+					<div *ngIf="response && response.errorMessage" class="alert alert-danger boot-alert">
+						{{ response.errorMessage}}
+					</div>
 					<div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
 						<input formControlName="email" class="input100" placeholder="Email" type="text" name="email">
 						<div style="color: red;" *ngIf="submitted && usersData.controls.email.errors"
@@ -26,10 +32,11 @@
 
 					</div>
 					<div>
-						<input type="text" id="authcode" class="form-control" *ngIf="this.tfaFlag" name="authcode" autocomplete="off"
-						formControlName="authcode" placeholder=" Enter the Code"
-						title="Please enter the code" required>
+						<input type="text" id="authcode" class="form-control" *ngIf="this.tfaFlag" name="authcode"
+							autocomplete="off" formControlName="authcode" placeholder=" Enter the Code" required>
 					</div>
+					<div *ngIf="resendTime>0">{{resendTime}}</div>
+					<div><a *ngIf="tfaFlag && resendTime == 0 " (click)="resendCode()">Resend</a></div>
 					<div class="flex-sb-m w-full p-t-3 p-b-32">
 						<div class="contact100-form-checkbox">
 							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">

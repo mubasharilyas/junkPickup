@@ -4,6 +4,7 @@ import { ApiService } from '../../services/api.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from "@angular/router";
 import { LoginServiceService } from 'src/app/services/login-service/login-service.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -20,9 +21,10 @@ export class LoginComponent implements OnInit {
   });
   submitted = false;
   tfaFlag = false;
-  errorMessage: any = null
-
-  constructor(public apiService: ApiService, private _loginService: LoginServiceService, public router: Router
+  response: any;
+  resendTime = 0;
+  constructor(public apiService: ApiService, private toastr: ToastrService,
+    private _loginService: LoginServiceService, public router: Router
   ) { }
 
   ngOnInit(): void {
@@ -31,25 +33,58 @@ export class LoginComponent implements OnInit {
   }
 
 
+  resendCode() {
+    this.apiService.postData('http://localhost:8081/api/v1/resendCode', this.usersData.value).subscribe(data => {
+      if (data.infoMessage && !data.status) {
+        var me = this;
+        this.resendTime = 60;
 
+        setInterval(function () {
+          if (me.resendTime > 0) {
+            me.resendTime--;
+          }
+        }, 1000);
+      }
+    })
+  }
 
   submit(data: any) {
     this.submitted = true;
     this._loginService.loginAuth(this.usersData.value).subscribe((data: any) => {
-      debugger;
-      this.errorMessage = null;
-      if (data['status'] === 200) {
-        console.log(data.body.user)
-        this._loginService.updateAuthStatus(true, data.body.user);
+      console.log(data)
+      this.response = data.body;
+      var me = this
+      if (this.response.infoMessage && !this.response.status) {
+        this.resendTime = 60;
+        setInterval(function () {
+          if (me.resendTime > 0) {
+            me.resendTime--;
+          }
+        }, 1000);
+      }
+      if (this.response.message) {
+        this._loginService.updateAuthStatus(true, data.user);
+        this.usersData.reset();
+        console.log(this.usersData.value)
         this.router.navigateByUrl('/admin-dashboard');
       }
-      if (data['status'] === 206) {
+      else if (this.response.infoMessage) {
+        this.toastr.info(this.response.infoMessage);
+
         this.tfaFlag = true;
+      } else {
+        this.toastr.error(this.response.errorMessage);
+
       }
-      
+
+
+      setTimeout(() => {
+        me.response = null
+      }, 3000);
+
     })
   }
- 
+
 
 
 

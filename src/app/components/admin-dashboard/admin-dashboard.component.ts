@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AbstractControlDirective } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
 import { LoginServiceService } from 'src/app/services/login-service/login-service.service';
@@ -9,10 +9,10 @@ import { Router } from "@angular/router";
   templateUrl: './admin-dashboard.component.html',
   styleUrls: ['./admin-dashboard.component.scss']
 })
-export class AdminDashboardComponent implements OnInit {
+export class AdminDashboardComponent implements OnInit, OnDestroy {
   collection: any;
   p: number = 1;
-
+  private subscription: any;
 
   paginationData: any = { page: 1 }
   searchProperty = '';
@@ -48,7 +48,7 @@ export class AdminDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.currrentUser = this._loginService.getUserStatus()
-    this.api.paginationSub.subscribe((data: any) => {
+    this.subscription = this.api.paginationSub.subscribe((data: any) => {
       console.log(data)
       this.paginationData = data;
       this.getAllData();
@@ -66,12 +66,14 @@ export class AdminDashboardComponent implements OnInit {
     this.api.updatePaginationSub(this.paginationData)
   }
   getAllData() {
-    let url = this.currrentUser && !this.currrentUser.isAdmin ? 'http://localhost:8081/api/v1/getJunksByAdmin' : 'http://localhost:8081/api/v1/getJunksByUser?userId=' + this.currrentUser.id
-    this.api.postData(url, this.paginationData).subscribe(data => {
-      this.details = data;
-      console.log(this.details)
+    if (this.currrentUser) {
+      let url = this.currrentUser && !this.currrentUser.isAdmin ? 'http://localhost:8081/api/v1/getJunksByAdmin' : 'http://localhost:8081/api/v1/getJunksByUser?userId=' + this.currrentUser.id
+      this.api.postData(url, this.paginationData).subscribe(data => {
+        this.details = data;
+        console.log(this.details)
+      }
+      )
     }
-    )
 
 
   }
@@ -87,6 +89,7 @@ export class AdminDashboardComponent implements OnInit {
   public toLocalDate(date: string) {
     return new Date(date).toLocaleDateString() + ' ' + new Date(date).toLocaleTimeString()
   }
+  ngOnDestroy() { this.subscription.unsubscribe(); }
 }
 
 

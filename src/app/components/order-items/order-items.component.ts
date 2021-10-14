@@ -57,7 +57,7 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
   getAllData() {
 
     this.api.postData('http://localhost:8081/api/v1/getOrderItemsById', { orderId: this.id, search: this.search }).subscribe(data => {
-      this.details = data;
+      this.details = data.items;
       console.log(this.details)
     }
     )

@@ -14,7 +14,7 @@ export class SignUpComponent implements OnInit {
     userName: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
     contactNumber: new FormControl('', [Validators.required]),
-    address: new FormControl('',[Validators.required]),
+    address: new FormControl('', [Validators.required]),
     password: new FormControl(''),
     confirmPassword: new FormControl('', [Validators.required]),
   });
@@ -24,15 +24,8 @@ export class SignUpComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  registerd = false
-  data = {
-    customerName: '',
-    email: '',
-    contactNumber: '',
-    address: '',
-    password: '',
-    confirmPassword: '',
-  }
+  response: any;
+
   isPasswordMatch = true
 
   btnClick() {
@@ -41,24 +34,19 @@ export class SignUpComponent implements OnInit {
   onSubmit() {
 
 
-
     console.log('userForm', this.userForm.value)
     {
       if (!this.userForm.invalid && (this.userForm.controls.confirmPassword.value == this.userForm.controls.password.value)) {
         this.api.postData('http://localhost:8081/api/v1/signUp', this.userForm.value).subscribe(data => {
-          if (data.token) {
-            localStorage.setItem('user', JSON.stringify(data));
-            if (data.isAdmin) {
-              this.router.navigate(['/admin-dashboard']);
-            } else if (data) {
-              this.router.navigate(['/trash-upload']);
-
-            }
-          }
+          this.response = data;
+          var me = this
+          setTimeout(() => {
+            me.response = null
+          }, 3000);
+          console.log(this.response)
         })
       }
       else {
-        console.log('invalid')
       }
 
     }

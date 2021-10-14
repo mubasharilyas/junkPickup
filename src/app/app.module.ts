@@ -26,7 +26,9 @@ import { CategoryComponent } from './components/category/category.component';
 import { AuthGuard } from './auth/auth.guard';
 import { CanActivate } from '@angular/router';
 import { AuthenticationService } from './services/authentication.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -57,7 +59,8 @@ import { AuthenticationService } from './services/authentication.service';
     ReactiveFormsModule,
     NgxUiLoaderModule,
     NgxSpinnerModule,
-
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot() // ToastrModule added
 
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },AuthGuard,AuthenticationService,

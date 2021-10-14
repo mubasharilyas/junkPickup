@@ -5,11 +5,17 @@
             <!-- <img src="images/signup-bg.jpg" alt=""> -->
             <div class="container">
                 <div class="signup-content">
+
                     <form [formGroup]="userForm" method="POST" id="signup-form" class="signup-form">
-                        <h2 class="form-title" style="font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; color:red;">Create account</h2>
-                        <!-- <div  class="alert alert-success">
-                            <strong>Account created Successfuly</strong> 
-                        </div> -->
+                        <h2 class="form-title"
+                            style="font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; color:red;">
+                            Create account</h2>
+                        <div *ngIf="response && response.success" class="alert alert-success">
+                             Success! Login to Continue
+                        </div>
+                        <div *ngIf="response && response.errorMessage" class="alert alert-danger">
+                           {{  response.errorMessage}}
+                        </div>
                         <div class="form-group">
                             <input type="text" placeholder="Name" class="form-input" name="name" id="name"
                                 formControlName="userName" />
@@ -28,7 +34,7 @@
                                     required.</div>
                                 <div style="color: red;"
                                     *ngIf="userForm.controls.email.errors && !userForm.controls.email.errors.required">
-                                    Please, enter valid email address.</div>
+                                    Please Enter valid email address.</div>
 
                             </div>
 
@@ -37,7 +43,8 @@
                         <div class="form-group">
                             <input type="text" placeholder="Contact number" class="form-input" name="contact"
                                 id="Contact" formControlName="contactNumber" />
-                            <div *ngIf="userForm.controls.contactNumber.touched && userForm.controls.contactNumber.invalid">
+                            <div
+                                *ngIf="userForm.controls.contactNumber.touched && userForm.controls.contactNumber.invalid">
 
 
                                 <div style="color: red;" *ngIf="userForm.controls.contactNumber.errors.required">
@@ -49,24 +56,24 @@
                         <div class="form-group">
                             <input type="text" placeholder="Address" class="form-input" name="Address" id="Address"
                                 formControlName="address" />
-                                <div *ngIf="userForm.controls.address.touched && userForm.controls.address.invalid">
+                            <div *ngIf="userForm.controls.address.touched && userForm.controls.address.invalid">
 
 
-                                    <div style="color: red;" *ngIf="userForm.controls.address.errors.required">
-                                        Address
-                                         is required</div>
-                                </div>
+                                <div style="color: red;" *ngIf="userForm.controls.address.errors.required">
+                                    Address
+                                    is required</div>
+                            </div>
                         </div>
                         <div class="form-group">
 
-                            <input [type]="passwordType" placeholder="Password"  class="form-input" name="password" id="password"
-                            formControlName="password" />
+                            <input [type]="passwordType" placeholder="Password" class="form-input" name="password"
+                                id="password" formControlName="password" />
                             <span toggle="#password" (click)="onShow()" [class]="passwordClass"></span>
 
                         </div>
                         <div class="form-group">
-                            <input [type]="passwordType" placeholder="Confirm Password" class="form-input" name="re_password"
-                                id="re_password" formControlName="confirmPassword" />
+                            <input [type]="passwordType" placeholder="Confirm Password" class="form-input"
+                                name="re_password" id="re_password" formControlName="confirmPassword" />
                             <div
                                 *ngIf="userForm.controls.confirmPassword.touched && userForm.controls.password.touched">
 
@@ -82,7 +89,7 @@
                         </div>
                         <div class="form-group">
 
-                            <input (click)='onSubmit()' type="submit" name="submit" id="submit" class="form-submit"
+                            <input (click)='onSubmit()' [disabled]="userForm.invalid || userForm.controls.confirmPassword.value != userForm.controls.password.value" type="submit" name="submit" id="submit" class="form-submit"
                                 value="Sign up" />
                         </div>
 
@@ -95,7 +102,7 @@
             </div>
         </section>
     </div>
- 
+
 
     <!-- JS -->
     <script src="vendor/jquery/jquery.min.js"></script>

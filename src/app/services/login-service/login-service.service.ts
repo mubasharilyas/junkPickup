@@ -18,10 +18,11 @@ export class LoginServiceService {
 
   loginAuth(userObj: any) {
     if (userObj.authcode) {
-      console.log('Appending headers');
       this.headerOptions = new HttpHeaders({
         'x-tfa': userObj.authcode
       });
+    } else {
+      this.headerOptions = null
     }
     return this._http.post("http://localhost:8081/api/v1/login", { email: userObj.email, password: userObj.password }, { observe: 'response', headers: this.headerOptions });
   }
@@ -48,7 +49,7 @@ export class LoginServiceService {
     this._isLoggedIn = false;
     this.authSub.next(this._isLoggedIn);
     this.userSub.next(null);
-    localStorage.setItem('user', '')
+    localStorage.removeItem('user')
     localStorage.setItem('isLoggedIn', "false")
   }
 
