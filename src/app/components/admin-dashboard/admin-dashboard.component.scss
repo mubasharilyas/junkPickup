@@ -5,11 +5,10 @@ $imageBig: 100px;
 $imageSmall: 60px;
 $padding: 10px;
 
-body {
-   background-color: lighten($baseColor, 30%);
-   * { box-sizing: border-box; }
-}
 
+.view-detail{
+   display: none;
+}
 .header {
    background-color: darken($baseColor, 5%);
    color: white;
@@ -32,7 +31,8 @@ img {
    max-width: calc(100% - 2em);
    margin: 1em auto;
    overflow: hidden;
-   width: 800px;
+   width: 80%;
+   margin-top: 15px;
 }
 
 table {
@@ -44,13 +44,11 @@ table {
    }
    
    td {
-      text-align: center;
       vertical-align: middle;
-      
+
       &:last-child {
          font-size: 0.95em;
          line-height: 1.4;
-         text-align: left;
       }
    }
    
@@ -64,38 +62,119 @@ table {
       &:nth-child(2n+1) { background-color: lighten($baseColor, 55%) }
    }
 }
-
+input{
+   height: 40px;
+   margin-left: 2%;
+}
+.btn-search{
+   width: 10%;
+   outline: none;
+   background-color: dodgerblue;
+   color: white;
+   height: 44px;
+   margin-left:2% ;
+   margin-bottom: 5px;
+}
+.batan{
+   width: 10%;
+   outline: none;
+   background-color: dodgerblue;
+   color: white;
+   height: 44px;
+   margin-left:2% ;
+   margin-bottom: 5px;
+}
+.view{
+   background-color: dodgerblue;
+   color: white;
+   border-radius: 15px;
+   height: 35px;
+  outline: none;
+}
+.drop{
+   margin-top: 80px;
+   margin-left: 11%;
+   width: 10%;
+   height: 38px;
+  
+}
 @media screen and (max-width: 700px) {   
    table, tr, td { display: block; }
+   .view-detail{
+      display: inline;
+      margin: auto;
+   }
+   input{
+      height: 40px;
+      width:32%;
+   }
+   .btn-search{
+      width: 28%;
+      outline: none;
+      background-color: dodgerblue;
+      color: white;
+      height: 44px;
+      margin-left: 11%;
+      margin-bottom: 5px;
+      margin-top: 10px;
+      
+   }
+   .view{
+      background-color: dodgerblue;
+      color: white;
+      border-radius: 15px;
+      height: 35px;
+     outline: none;
+   }
+   .drop{
+      margin-top: 80px;
+      margin-left: 12%;
+      width: 38%;
+      height: 40px;
+      margin-right: 3%;
+      
+   }
+   .batan{
+      width: 28%;
+      outline: none;
+      background-color: dodgerblue;
+      color: white;
+      height: 44px; 
+      margin-bottom: 5px;
+      margin-top: 10px;
+      margin-left:3px;
+   }
    
    td {
-      &:first-child {
-         position: absolute;
-         top: 50%;
-         transform: translateY(-50%);
-         width: $imageBig;
-      }
 
-      &:not(:first-child) {
+
          clear: both;
-         margin-left: $imageBig;
+         margin-left: 10px;
          padding: 4px 20px 4px 90px;
          position: relative;
-         text-align: left;
+         text-align: right;
 
          &:before {
             color: lighten($baseColor, 30%);
             content: '';
             display: block;
             left: 0;
-            position: absolute;
-         }
-      }
+            position:absolute;
 
-      &:nth-child(2):before { content: 'Order No:'; }
-      &:nth-child(3):before { content: 'Customer:'; }
-      &:nth-child(4):before { content: 'Action:'; }
-      &:nth-child(5):before { content: 'Comments:'; }
+         }
+
+
+      &:nth-child(1):before { content: 'Order No:'; }
+     
+     
+      &:nth-child(2):before { content: 'Date:'; }
+      &:nth-child(3):before { content: 'Total:'; }
+      &:nth-child(4):before { content: 'Status:'; }
+      &:nth-child(5):before { content: ''; }
+      &:nth-child(5){ text-align: center; }
+
+    
+
    }
    
    tr {
@@ -103,7 +182,10 @@ table {
       position: relative;
       &:first-child { display: none; }
    }
+  
 }
+
+
 
 
 
