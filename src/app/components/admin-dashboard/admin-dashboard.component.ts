@@ -3,6 +3,8 @@ import { AbstractControlDirective } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
 import { LoginServiceService } from 'src/app/services/login-service/login-service.service';
 import { Router } from "@angular/router";
+import { Subscription } from 'rxjs'
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -12,8 +14,8 @@ import { Router } from "@angular/router";
 export class AdminDashboardComponent implements OnInit, OnDestroy {
   collection: any;
   p: number = 1;
-  private subscription: any;
-
+  subscription: any;
+  totalOrders = 0;
   paginationData: any = { page: 1 }
   searchProperty = '';
   searchValue = ''
@@ -25,16 +27,17 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
   currrentUser: any = { isAdmin: false };
   constructor(public api: ApiService,
     private _loginService: LoginServiceService,
-    public router: Router) {
+    public router: Router,
+    private toastr: ToastrService) {
     this._loginService.userSub.subscribe((data: any) => {
       this.currrentUser = data;
     })
   }
 
-  status = ['In progres', 'Completed', 'Contacted the user', 'Need to contact customer', 'Approved']
+  status = ['In Progres', 'Completed', 'Contacted the user', 'Need to contact customer', 'Approved']
   onPageChange(event: any) {
-    this.p = event
-    this.api.updatePaginationSub({ page: event })
+    this.paginationData.page = event
+    this.api.updatePaginationSub(this.paginationData)
   }
 
   public viewDetails(orderId: any) {
@@ -55,6 +58,7 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
     })
   }
   updateSearch() {
+    this.paginationData.page = 1
     this.paginationData.search = { property: this.searchProperty, value: this.searchValue }
     this.api.updatePaginationSub(this.paginationData)
   }
@@ -63,14 +67,16 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
     this.searchValue = ''
 
     this.paginationData.search = null;
+    this.paginationData.page = 1
     this.api.updatePaginationSub(this.paginationData)
   }
   getAllData() {
     if (this.currrentUser) {
       let url = this.currrentUser && !this.currrentUser.isAdmin ? 'http://localhost:8081/api/v1/getJunksByAdmin' : 'http://localhost:8081/api/v1/getJunksByUser?userId=' + this.currrentUser.id
       this.api.postData(url, this.paginationData).subscribe(data => {
-        this.details = data;
-        console.log(this.details)
+        this.details = data.orders;
+        this.totalOrders = data.totalOrders;
+        console.log(data)
       }
       )
     }
@@ -80,14 +86,20 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
   updateJunk(junk: any) {
 
     this.api.putData('http://localhost:8081/api/v1/updateJunk', { status: junk.status, id: junk.id, userId: junk.userId }).subscribe(data => {
+      if (data && data.success) {
+        this.toastr.success(data.success);
+      } else {
+        this.toastr.error(data.error);
+        
+
+      }
       this.getAllData()
-      console.log(this.details)
     }
     )
 
   }
   public toLocalDate(date: string) {
-    return new Date(date).toLocaleDateString() + ' ' + new Date(date).toLocaleTimeString()
+    return new Date(date).toLocaleDateString()
   }
   ngOnDestroy() { this.subscription.unsubscribe(); }
 }

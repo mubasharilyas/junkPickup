@@ -1,13 +1,16 @@
+<select name="cars" id="cars" class="drop" [(ngModel)]="searchProperty">
+    <option value="" selected disabled>Search By</option>
+    <option value="u.userName">Customer Name</option>
+    <option value="ord.status">Order Status</option>
+    <option value="c.name">Category</option>
+    <option value="u.address">Address </option>
+    <option value="DATE(ord.createdAt)">Order Date</option>
+</select>
+<input [(ngModel)]="searchValue" type="tex" *ngIf="searchProperty != 'DATE(ord.createdAt)'">
+<input [(ngModel)]="searchValue" *ngIf="searchProperty == 'DATE(ord.createdAt)'" type="date">
 
-  <select name="cars" id="cars"class="drop">
-    <option value="volvo">Volvo</option>
-    <option value="saab">Saab</option>
-    <option value="opel">Opel</option>
-    <option value="audi">Audi</option>
-  </select>
-  <input type="tex">
-  <button class="btn-search btn">search</button >
-  <button class="batan btn">Clear</button>
+<button class="btn-search btn" (click)="updateSearch()">Search</button>
+<button class="batan btn" (click)="clearSearch()">Clear</button>
 <div class="table-users">
     <div class="header">Orders</div>
 
@@ -32,23 +35,31 @@
  <th>Action 2</th> -->
         </tr>
 
-        <tr>
+        <tr
+            *ngFor="let item of details | paginate: { itemsPerPage: 5, currentPage: paginationData.page,totalItems: totalOrders }">
 
-            <td>10</td>
-            <td>Date</td>
+            <td>{{item.id}}</td>
+            <td>{{toLocalDate(item.createdAt)}}</td>
 
-            <td>Total</td>
-            <td>Status</td>
+            <td>{{item.total}}</td>
+            <td> <select style="width: 40%;" name="cars" id="cars" [(ngModel)]="item.status"
+                    (change)="updateJunk(item)">
+                    <option *ngFor="let st of status" [value]="st">{{st}}</option>
 
-            <td> <button class="view btn">View Details</button></td>
+                </select></td>
+
+            <td> <button class="view btn" (click)="viewDetails(item.id)"> Details</button></td>
 
 
         </tr>
 
 
     </table>
-</div>
 
+</div>
+<div class="control">
+    <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+</div>
 
 <!-- <div *ngIf=" details" style="overflow-x: auto;  margin-top: 70px;
 ">

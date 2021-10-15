@@ -55,6 +55,7 @@ table {
    th { 
       background-color: lighten($baseColor, 50%);
       font-weight: 300;
+      width: 20%;
    }
    
    tr {     
@@ -228,8 +229,8 @@ input{
 // }
 
 
-//  .control{
-//      text-align: center;
-//      margin-top: 10px;
-//      color: blue;
-//  }
+ .control{
+     text-align: center;
+     margin-top: 10px;
+     color: blue;
+ }

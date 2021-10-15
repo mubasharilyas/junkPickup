@@ -35,8 +35,8 @@
 						<input type="text" id="authcode" class="form-control" *ngIf="this.tfaFlag" name="authcode"
 							autocomplete="off" formControlName="authcode" placeholder=" Enter the Code" required>
 					</div>
-					<div *ngIf="resendTime>0">{{resendTime}}</div>
-					<div><a *ngIf="tfaFlag && resendTime == 0 " (click)="resendCode()">Resend</a></div>
+					<div style="color: blue; float: right;" *ngIf="resendTime>0">{{resendTime}}</div>
+					<div><a style="color: blue; float: right;" *ngIf="tfaFlag && resendTime == 0 " (click)="resendCode()">Resend</a></div>
 					<div class="flex-sb-m w-full p-t-3 p-b-32">
 						<div class="contact100-form-checkbox">
 							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">

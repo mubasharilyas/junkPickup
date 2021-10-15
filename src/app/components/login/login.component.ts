@@ -63,9 +63,8 @@ export class LoginComponent implements OnInit {
         }, 1000);
       }
       if (this.response.message) {
-        this._loginService.updateAuthStatus(true, data.user);
+        this._loginService.updateAuthStatus(true, data.body.user);
         this.usersData.reset();
-        console.log(this.usersData.value)
         this.router.navigateByUrl('/admin-dashboard');
       }
       else if (this.response.infoMessage) {
