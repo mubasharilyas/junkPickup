@@ -3,7 +3,7 @@ import { WebcamImage } from 'ngx-webcam';
 import { ApiService } from './services/api.service';
 import { HttpClient } from '@angular/common/http';
 import { NgxSpinnerService } from "ngx-spinner";
-import { Router, NavigationStart } from "@angular/router";
+import { Router, NavigationEnd } from "@angular/router";
 
 // import {Component} from '@angular/core';
 import { Subject } from 'rxjs';
@@ -20,9 +20,9 @@ export class AppComponent implements OnInit {
 
 
 
-  constructor(public api: ApiService, public http: HttpClient, private spinner: NgxSpinnerService, private router: Router) {
+  constructor(public api: ApiService, public http: HttpClient,private router: Router) {
     router.events.subscribe(event => {
-      if (event instanceof NavigationStart && !event.url.includes('order-items/') && !event.url.includes('admin-dashboard')) {
+      if (event instanceof NavigationEnd && !event.url.includes('order-items/') && !event.url.includes('admin-dashboard')) {
         this.api.updatePaginationSub({ page: 1 , search: { property:'c.name',value:'Sofa'} })
 
       }
@@ -30,12 +30,7 @@ export class AppComponent implements OnInit {
   }
   title = 'junkPickup';
   ngOnInit() {
-    this.spinner.show();
-
-    setTimeout(() => {
-      /** spinner ends after 5 seconds */
-      this.spinner.hide();
-    }, 5000);
+   
   }
 
 }

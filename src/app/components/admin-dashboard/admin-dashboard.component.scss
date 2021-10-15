@@ -6,9 +6,7 @@ $imageSmall: 60px;
 $padding: 10px;
 
 
-.view-detail{
-   display: none;
-}
+
 .header {
    background-color: darken($baseColor, 5%);
    color: white;
@@ -91,6 +89,22 @@ input{
    border-radius: 15px;
    height: 35px;
   outline: none;
+  font-size: 80%;
+  margin-left: 2px;
+
+
+}
+.view-customer{
+   background-color: dodgerblue;
+   color: white;
+   border-radius: 15px;
+   height: 35px;
+  outline: none;
+  margin-left: 10% auto;
+  font-size: 80%;
+  margin-left: 2px;
+
+
 }
 .drop{
    margin-top: 80px;
@@ -105,6 +119,7 @@ input{
       display: inline;
       margin: auto;
    }
+   
    input{
       height: 40px;
       width:32%;
@@ -126,6 +141,19 @@ input{
       border-radius: 15px;
       height: 35px;
      outline: none;
+     margin-right: 2px;
+     font-size: 80%;
+
+   }
+   .view-customer{
+      background-color: dodgerblue;
+      color: white;
+      border-radius: 15px;
+      height: 35px;
+     outline: none;
+     margin-left: 2px;
+     font-size: 80%;
+
    }
    .drop{
       margin-top: 80px;
@@ -148,7 +176,9 @@ input{
    
    td {
 
-
+      select{
+         width: 30%;
+       }
          clear: both;
          margin-left: 10px;
          padding: 4px 20px 4px 90px;
@@ -224,13 +254,23 @@ input{
 //   width: 80%;
   
 // }
-// select{
-//   width: 80%;
-// }
+select{
+  width: 80%;
+}
 
 
  .control{
      text-align: center;
      margin-top: 10px;
      color: blue;
+     font-size: smaller;
+     display: flex;
+   justify-content: center;
  }
+ .my-pagination::ng-deep .ngx-pagination{
+   padding-left: 0px !important;
+  
+ }
+ 
+ 
+ 

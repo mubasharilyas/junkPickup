@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
-import { FormBuilder, FormControl, FormControlName, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-category',
@@ -12,7 +12,7 @@ export class CategoryComponent implements OnInit {
   ];
 
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService,private toastr: ToastrService,) { }
 
   ngOnInit(): void {
    this.getCategories()

@@ -5,6 +5,7 @@ import { LoginServiceService } from 'src/app/services/login-service/login-servic
 import { Router } from "@angular/router";
 import { Subscription } from 'rxjs'
 import { ToastrService } from 'ngx-toastr';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -28,7 +29,8 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
   constructor(public api: ApiService,
     private _loginService: LoginServiceService,
     public router: Router,
-    private toastr: ToastrService) {
+    private toastr: ToastrService,
+    private spinner: NgxUiLoaderService) {
     this._loginService.userSub.subscribe((data: any) => {
       this.currrentUser = data;
     })
@@ -52,8 +54,12 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.currrentUser = this._loginService.getUserStatus()
     this.subscription = this.api.paginationSub.subscribe((data: any) => {
-      console.log(data)
-      this.paginationData = data;
+      if (data.search){
+        this.searchProperty=data.search.property
+        this.searchValue=data.search.value
+
+      }
+        this.paginationData = data;
       this.getAllData();
     })
   }
@@ -71,11 +77,15 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
     this.api.updatePaginationSub(this.paginationData)
   }
   getAllData() {
+    this.spinner.start();
+
     if (this.currrentUser) {
       let url = this.currrentUser && !this.currrentUser.isAdmin ? 'http://localhost:8081/api/v1/getJunksByAdmin' : 'http://localhost:8081/api/v1/getJunksByUser?userId=' + this.currrentUser.id
       this.api.postData(url, this.paginationData).subscribe(data => {
         this.details = data.orders;
         this.totalOrders = data.totalOrders;
+        this.spinner.stop();
+
         console.log(data)
       }
       )
@@ -83,16 +93,24 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
 
 
   }
+  viewCustomer() {
+
+  }
   updateJunk(junk: any) {
+    this.spinner.start();
 
     this.api.putData('http://localhost:8081/api/v1/updateJunk', { status: junk.status, id: junk.id, userId: junk.userId }).subscribe(data => {
+      this.spinner.stop();
+
       if (data && data.success) {
         this.toastr.success(data.success);
+
       } else {
         this.toastr.error(data.error);
-        
+
 
       }
+
       this.getAllData()
     }
     )
@@ -101,7 +119,10 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
   public toLocalDate(date: string) {
     return new Date(date).toLocaleDateString()
   }
-  ngOnDestroy() { this.subscription.unsubscribe(); }
+  ngOnDestroy() {
+    console.log('Destroyed')
+    this.subscription.unsubscribe();
+  }
 }
 
 

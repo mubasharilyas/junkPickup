@@ -85,10 +85,7 @@ export class TrashUploadComponent implements OnInit, AfterViewInit {
       })
 
     })
-    // setTimeout(() => {
-    //   /** spinner ends after 5 seconds */
-    //   this.spinner.hide();
-    // }, 5000);
+ 
 
 
   }

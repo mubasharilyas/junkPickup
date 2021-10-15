@@ -1,3 +1,4 @@
+
 <select name="cars" id="cars" class="drop" [(ngModel)]="searchProperty">
     <option value="" selected disabled>Search By</option>
     <option value="u.userName">Customer Name</option>
@@ -6,7 +7,7 @@
     <option value="u.address">Address </option>
     <option value="DATE(ord.createdAt)">Order Date</option>
 </select>
-<input [(ngModel)]="searchValue" type="tex" *ngIf="searchProperty != 'DATE(ord.createdAt)'">
+<input [(ngModel)]="searchValue" placeholder="Value" type="tex" *ngIf="searchProperty != 'DATE(ord.createdAt)'">
 <input [(ngModel)]="searchValue" *ngIf="searchProperty == 'DATE(ord.createdAt)'" type="date">
 
 <button class="btn-search btn" (click)="updateSearch()">Search</button>
@@ -42,13 +43,13 @@
             <td>{{toLocalDate(item.createdAt)}}</td>
 
             <td>{{item.total}}</td>
-            <td> <select style="width: 40%;" name="cars" id="cars" [(ngModel)]="item.status"
+            <td> <select  name="cars" id="cars" [(ngModel)]="item.status"
                     (change)="updateJunk(item)">
                     <option *ngFor="let st of status" [value]="st">{{st}}</option>
 
                 </select></td>
 
-            <td> <button class="view btn" (click)="viewDetails(item.id)"> Details</button></td>
+            <td> <button class="view btn" (click)="viewCustomer()">Customer</button><button class="view-customer btn" (click)="viewDetails(item.id)">Items</button></td>
 
 
         </tr>
@@ -58,7 +59,8 @@
 
 </div>
 <div class="control">
-    <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+
+    <pagination-controls class="my-pagination" [responsive] = "true" (pageChange)="onPageChange($event)"></pagination-controls>
 </div>
 
 <!-- <div *ngIf=" details" style="overflow-x: auto;  margin-top: 70px;

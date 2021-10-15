@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { Router, ActivatedRoute } from "@angular/router";
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({
   selector: 'app-order-items',
@@ -27,7 +28,7 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
     }
   ];
   currrentUser: any = { isAdmin: false };
-  constructor(public api: ApiService, private route: ActivatedRoute) {
+  constructor(public api: ApiService, private route: ActivatedRoute, private spinner: NgxUiLoaderService,) {
   }
 
   status = ['inprogress', 'Completed', 'contacted the user', 'need to contact customer price', 'approved']
@@ -41,6 +42,9 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
+    
+
+ 
     this.api.paginationSub.subscribe((data: any) => {
       console.log(data)
       this.search = data.search;
@@ -55,9 +59,10 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
 
 
   getAllData() {
-
+    this.spinner.start();
     this.api.postData('http://localhost:8081/api/v1/getOrderItemsById', { orderId: this.id, search: this.search }).subscribe(data => {
       this.details = data.items;
+      this.spinner.stop();
       console.log(this.details)
     }
     )
