@@ -8,11 +8,14 @@ import { AdminDashboardComponent } from './components/admin-dashboard/admin-dash
 import { OrderItemsComponent } from './components/order-items/order-items.component';
 
 import { CategoryComponent } from './components/category/category.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 import { AuthGuardGuard } from '../../src/app/guards/auth-guard.guard';
 import { UserGuardGuard } from '../../src/app/guards/user-guard.guard';
 
 const routes: Routes = [
+  { path: '', component: LoginComponent },
+  { path: 'reset-password/:token', component: ResetPasswordComponent },
   { path: 'login', component: LoginComponent },
   { path: 'sign-up', component: SignUpComponent },
 

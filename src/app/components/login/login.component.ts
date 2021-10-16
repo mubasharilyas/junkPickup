@@ -1,4 +1,3 @@
-import { LocationStrategy } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -63,6 +62,7 @@ export class LoginComponent implements OnInit {
         }, 1000);
       }
       if (this.response.message) {
+        console.log(data.body)
         this._loginService.updateAuthStatus(true, data.body.user);
         this.usersData.reset();
         this.router.navigateByUrl('/admin-dashboard');
@@ -82,9 +82,19 @@ export class LoginComponent implements OnInit {
       }, 3000);
 
     })
+
   }
 
-
+  forgotPassword() {
+  console.log('forgot')
+    this.apiService.postData('http://localhost:8081/api/v1/resetPasswordEmail', this.usersData.value).subscribe((response: any) => {
+      if (response.errorMessage) {
+        this.toastr.error(response.errorMessage)
+      } else if (response.message) {
+        this.toastr.success(response.message)
+      }
+    })
+  }
 
 
 

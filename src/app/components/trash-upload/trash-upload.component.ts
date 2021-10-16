@@ -1,5 +1,7 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild, AfterViewInit } from '@angular/core';
-import { WebcamImage, WebcamInitError, WebcamUtil } from 'ngx-webcam';
+import { WebcamImage, WebcamInitError } from 'ngx-webcam';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
+
 import { Observable, Subject } from 'rxjs';
 import { ApiService } from '../../services/api.service';
 import { NgxSpinnerService } from "ngx-spinner";
@@ -30,13 +32,10 @@ export class TrashUploadComponent implements OnInit, AfterViewInit {
   uploaded = false
   button: any;
   errors: WebcamInitError[] = [];
-  categories: any = []
+  categories: any = [];
+  otherCategory: any = { isOther: false, name: '', numberOfItems: '', price: '' };
   public junkFormDat = { image: "", fileName: '', userId: 0 }
-  private trigger: Subject<void> = new Subject<void>();
-  private nextWebcam: Subject<boolean | string> = new Subject<boolean | string>();
-
-  constructor(public api: ApiService, private toastr: ToastrService,
-    private spinner: NgxSpinnerService) {
+  constructor(public api: ApiService, private toastr: ToastrService, private spinner: NgxUiLoaderService) {
 
   }
   ngAfterViewInit(): void {
@@ -71,21 +70,33 @@ export class TrashUploadComponent implements OnInit, AfterViewInit {
   categoryToggle(category: any, target: any, index: Number) {
     console.log(category, target.checked)
     if (target.checked) {
-      this.items.push({ categoryId: category.id, ...category });
+      this.items.push(category);
     } else {
       this.items.splice(index, 1)
     }
+    console.log(this.items)
+  }
+  toggleOtherCategory(target: any) {
+    if (target.checked) {
+      this.otherCategory.isOther = true
+    } else {
+      this.otherCategory.isOther = false
+
+    }
   }
   ngOnInit(): void {
+    this.spinner.start();
 
     this.api.getData('http://localhost:8081/api/v1/getAllCategories').subscribe((response: any) => {
+      this.spinner.stop();
+
       this.categories = response.map((cat: any) => {
         cat.numberOfItems = '';
+
         return cat
       })
-
     })
- 
+
 
 
   }
@@ -93,21 +104,27 @@ export class TrashUploadComponent implements OnInit, AfterViewInit {
 
 
   btnUpload() {
+    this.spinner.start();
+
     let user: any = localStorage.getItem('user')
     user = JSON.parse(user)
-    this.junkFormDat.userId = user.id
+    this.junkFormDat.userId = user.id;
+    let isOtherExist = this.items.filter((x: any) => x.isOther)
+    if (this.otherCategory.isOther && !isOtherExist[0]) {
+      this.items.push(this.otherCategory)
+    }
     // this.junkFormDat.userId = user.id
     this.api.postData('http://localhost:8081/api/v1/createOrder', { ...this.junkFormDat, items: this.items }).subscribe(data => {
       this.uploaded = data;
       console.log(data)
-      if (data.errorMessage){
+      if (data.errorMessage) {
         this.toastr.error(data.errorMessage);
 
-      }else if(data.success){
+      } else if (data.success) {
         this.toastr.success('Order created successfully');
 
       }
-        console.log(data)
+      this.spinner.stop();
     })
 
   }

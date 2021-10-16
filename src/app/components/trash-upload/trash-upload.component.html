@@ -7,7 +7,7 @@
             <h1>Create</h1>
 
         </header>
-       
+
         <div class="ways">
             <ul>
                 <li #upload id="upload" (click)="clickUpload()">
@@ -17,13 +17,13 @@
             </ul>
         </div>
 
-       
 
 
 
 
 
 
+        <h1 style="text-align: center;">Select Category</h1>
         <div class="box">
             <div style="width: 100%; padding-bottom: 5px ">
                 <table>
@@ -41,10 +41,11 @@
                         <th style="text-align: center;">
                             Subtotal
                         </th>
-                       
+
                     </tr>
-                    <tr  *ngFor="let item of categories; index as i">
-                        <td style="width: 10%;padding: 10px"> <input type="checkbox"  (change)="categoryToggle(item,$event.target,i)"></td>
+                    <tr *ngFor="let item of categories; index as i">
+                        <td style="width: 10%;padding: 10px"> <input type="checkbox"
+                                (change)="categoryToggle(item,$event.target,i)"></td>
                         <td style="width: 35%;">
                             {{item.name}}
                         </td>
@@ -52,25 +53,35 @@
                             {{item.price}}
                         </td>
                         <td style="width: 30%;">
-                            <input type="text" class="form-control input-sm " [(ngModel)]="item.numberOfItems"  style="width: 80%; height: 25px; margin: auto;">
+                            <input type="text" class="form-control input-sm " [(ngModel)]="item.numberOfItems"
+                                style="width: 80%; height: 25px; margin: auto;">
                         </td>
                         <td style="width: 15%;text-align: center;">
                             <span> {{item.price * item.numberOfItems}}</span>
                         </td>
-                       
+
                     </tr>
 
                 </table>
 
             </div>
+        </div>
+        <div style="margin-top: 10px; "><input type="checkbox" (change)="toggleOtherCategory($event.target)"> Other
+            Category
 
         </div>
+        <div *ngIf="otherCategory.isOther" style="margin-top: 30px; display: inline;">
+            <input type="text" class=" input-sm " [(ngModel)]="otherCategory.name" placeholder="Category"
+                style="width: 30%; height: 25px; ">
 
+            <input type="text" class=" input-sm " [(ngModel)]="otherCategory.numberOfItems" placeholder="Quantity"
+                style="width: 30%; height: 25px; margin-left: 5%; ">
+        </div>
         <footer>
             <ul>
 
 
-                <button style="margin-left: 35%" (click)="btnUpload()" >Submit</button>
+                <button style="margin-left: 35%" (click)="btnUpload()">Submit</button>
             </ul>
         </footer>
 

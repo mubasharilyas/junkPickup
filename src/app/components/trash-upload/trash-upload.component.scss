@@ -850,11 +850,13 @@ footer a {
     border: 2px solid #1AA1E5;
     max-width: 310px;
     margin-top: 5%;
+    max-height: 200px;
+    overflow-y: scroll;
   }
   input{
     margin-top: 10px;
   }
   th{
-    font-size: 10px;
+    font-size: 50%;
   }
   

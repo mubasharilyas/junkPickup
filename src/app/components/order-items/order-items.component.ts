@@ -28,7 +28,7 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
     }
   ];
   currrentUser: any = { isAdmin: false };
-  constructor(public api: ApiService, private route: ActivatedRoute, private spinner: NgxUiLoaderService,) {
+  constructor(public api: ApiService, private route: ActivatedRoute, private spinner: NgxUiLoaderService) {
   }
 
   status = ['inprogress', 'Completed', 'contacted the user', 'need to contact customer price', 'approved']
@@ -42,9 +42,9 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-    
 
- 
+
+
     this.api.paginationSub.subscribe((data: any) => {
       console.log(data)
       this.search = data.search;
@@ -61,12 +61,22 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
   getAllData() {
     this.spinner.start();
     this.api.postData('http://localhost:8081/api/v1/getOrderItemsById', { orderId: this.id, search: this.search }).subscribe(data => {
-      this.details = data.items;
+      this.details = data.items.map((item: any) => {
+        item.price = item.price ? item.price : (item.subTotal > 0 && item.numberOfItems > 0 ? item.subTotal / item.numberOfItems : '');
+        return item;
+      });
       this.spinner.stop();
       console.log(this.details)
     }
     )
 
+  }
+  updateItem(item: any) {
+    this.spinner.start();
+    this.api.postData('http://localhost:8081/api/v1/updateOrderItem', item).subscribe(data => {
+      this.spinner.stop();
+      this.getAllData()
+    })
   }
   ngOnDestroy() { this.sub.unsubscribe(); }
 }

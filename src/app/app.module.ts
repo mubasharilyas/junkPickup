@@ -11,7 +11,6 @@ import { WebcamModule } from 'ngx-webcam';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component'
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CameraComponent } from './camera/camera.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { JwtInterceptor } from "./jwt.interceptor";
 import { NgxUiLoaderModule } from "ngx-ui-loader";
@@ -23,12 +22,13 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
 import { OrderItemsComponent } from './components/order-items/order-items.component';
 
 import { CategoryComponent } from './components/category/category.component';
-import { AuthGuard } from './auth/auth.guard';
+import { AuthGuardGuard } from './guards/auth-guard.guard';
 import { CanActivate } from '@angular/router';
 import { AuthenticationService } from './services/authentication.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ToastrModule } from 'ngx-toastr';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 
 @NgModule({
@@ -39,7 +39,7 @@ import { ToastrModule } from 'ngx-toastr';
     TrashUploadComponent,
 
     AdminDashboardComponent,
-      CameraComponent,
+   
 
     NavigationComponent,
 
@@ -47,6 +47,7 @@ import { ToastrModule } from 'ngx-toastr';
       AboutUsComponent,
       OrderItemsComponent,
       CategoryComponent,
+      ResetPasswordComponent,
     
   ],
   imports: [
@@ -63,7 +64,7 @@ import { ToastrModule } from 'ngx-toastr';
     ToastrModule.forRoot() // ToastrModule added
 
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },AuthGuard,AuthenticationService,
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },AuthGuardGuard,AuthenticationService,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
