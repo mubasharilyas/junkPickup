@@ -77,7 +77,7 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
     this.api.updatePaginationSub(this.paginationData)
   }
   getAllData() {
-    this.spinner.start();
+    // this.spinner.start();
 
     if (this.currrentUser) {
       let url = this.currrentUser && !this.currrentUser.isAdmin ? 'http://localhost:8081/api/v1/getJunksByAdmin' : 'http://localhost:8081/api/v1/getJunksByUser?userId=' + this.currrentUser.id
