@@ -18,14 +18,12 @@
 						<input formControlName="email" class="input100" placeholder="Email" type="text" name="email">
 						<div style="color: red;" *ngIf="submitted && usersData.controls.email.errors"
 							class="invalid-feedback">this not find email</div>
-						<div style="color: red;" *ngIf="submitted && usersData.controls.email.errors">Email must be a
-							valid email address</div>
+						<!-- <div style="color: red;" *ngIf="submitted && usersData.controls.email.errors">
+							</div> -->
 
 					</div>
-
-
-
-
+					<div style="color: red;" *ngIf="submitted && usersData.controls.email.errors">
+                     Enter an  email address</div>
 					<div class="wrap-input100 validate-input" data-validate="Password is required">
 						<input formControlName="password" placeholder="Password" class="input100" type="password"
 							name="pass">
@@ -58,6 +56,7 @@
 							Login
 						</button>
 						<a style="color:blue; margin-top: 20px;" (click)="forgotPassword()" > Forgot Password ?</a>
+						<a style="color:blue; margin-top: 20px; margin-left: 40px;"(click)="btnClick()" > Sign up</a>
 					</div>
 
 				
