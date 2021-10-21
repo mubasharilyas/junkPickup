@@ -49,7 +49,7 @@
 
                 </select></td>
 
-            <td> <button class="view btn" (click)="viewCustomer()">Customer</button><button class="view-customer btn" (click)="viewDetails(item.id)">Items</button></td>
+            <td> <button class="view btn" data-toggle="modal" data-target="#exampleModalCenter" (click)="viewCustomer(item)" >Customer</button><button class="view-customer btn" (click)="viewDetails(item.id)">Items</button></td>
 
 
         </tr>
@@ -62,7 +62,35 @@
 
     <pagination-controls class="my-pagination" [responsive] = "true" (pageChange)="onPageChange($event)"></pagination-controls>
 </div>
-
+<div *ngIf="selectedOrder" class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content rounded-0">
+        <div class="modal-header">
+          <!-- <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5> -->
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true"><i class="fal fa-times"></i></span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label><b>Customer name</b></label><br>  
+            {{selectedOrder.userName}}
+        </div>
+        <div class="form-group" style="word-wrap:break-word;">
+          <label><b>Email</b></label><br>
+          {{selectedOrder.email}}
+          <div class="form-group"><br>
+            <label><b>Address</b></label><br>
+            {{selectedOrder.address}}
+        </div>
+        <div class="form-group">
+          <label><b>Phone number</b></label><br>
+          {{selectedOrder.contactNumber}}
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
 <!-- <div *ngIf=" details" style="overflow-x: auto;  margin-top: 70px;
 ">
     <div class="row">

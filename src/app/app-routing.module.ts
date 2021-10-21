@@ -10,22 +10,20 @@ import { OrderItemsComponent } from './components/order-items/order-items.compon
 import { CategoryComponent } from './components/category/category.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
-import { AuthGuardGuard } from '../../src/app/guards/auth-guard.guard';
-import { UserGuardGuard } from '../../src/app/guards/user-guard.guard';
+import { AuthGuard } from './guards/auth.guard';
+import { AdminGuard } from './guards/admin.guard';
+
+import { UserGuard } from './guards/user.guard';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'reset-password/:token', component: ResetPasswordComponent },
   { path: 'login', component: LoginComponent },
   { path: 'sign-up', component: SignUpComponent },
-
-
-  {path:'order-items/:orderId',component:OrderItemsComponent},
-
-
-  {path:'category',component:CategoryComponent},
-  { path: 'trash-upload', component: TrashUploadComponent },
-  { path: 'admin-dashboard', component: AdminDashboardComponent }
+  { path: 'order-items/:orderId', component: OrderItemsComponent ,canActivate: [AdminGuard]},
+  { path: 'category', component: CategoryComponent ,canActivate: [AdminGuard]},
+  { path: 'trash-upload', component: TrashUploadComponent, canActivate: [UserGuard] },
+  { path: 'admin-dashboard', component: AdminDashboardComponent,canActivate: [AdminGuard] }
 
 ];
 

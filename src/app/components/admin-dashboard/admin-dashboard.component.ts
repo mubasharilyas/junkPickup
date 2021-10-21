@@ -17,11 +17,12 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
   p: number = 1;
   subscription: any;
   totalOrders = 0;
+  selectedOrder: any = null;;
   paginationData: any = { page: 1 }
   searchProperty = '';
   searchValue = ''
   details: any = [
-    { userName: 'test', }
+
 
 
   ];
@@ -54,12 +55,12 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.currrentUser = this._loginService.getUserStatus()
     this.subscription = this.api.paginationSub.subscribe((data: any) => {
-      if (data.search){
-        this.searchProperty=data.search.property
-        this.searchValue=data.search.value
+      if (data.search) {
+        this.searchProperty = data.search.property
+        this.searchValue = data.search.value
 
       }
-        this.paginationData = data;
+      this.paginationData = data;
       this.getAllData();
     })
   }
@@ -80,7 +81,7 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
     this.spinner.start();
 
     if (this.currrentUser) {
-      let url = this.currrentUser && !this.currrentUser.isAdmin ? 'http://localhost:8081/api/v1/getJunksByAdmin' : 'http://localhost:8081/api/v1/getJunksByUser?userId=' + this.currrentUser.id
+      let url = 'http://localhost:8081/api/v1/getJunksByAdmin'
       this.api.postData(url, this.paginationData).subscribe(data => {
         this.details = data.orders;
         this.totalOrders = data.totalOrders;
@@ -93,8 +94,9 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
 
 
   }
-  viewCustomer() {
-
+  viewCustomer(item: any) {
+    console.log(item);
+    this.selectedOrder = item;
   }
   updateJunk(junk: any) {
     this.spinner.start();

@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { Router, ActivatedRoute } from "@angular/router";
 import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-order-items',
@@ -28,16 +29,17 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
     }
   ];
   currrentUser: any = { isAdmin: false };
-  constructor(public api: ApiService, private route: ActivatedRoute, private spinner: NgxUiLoaderService) {
+  constructor(public api: ApiService,
+    private route: ActivatedRoute,
+    private spinner: NgxUiLoaderService,
+    private toaster: ToastrService) {
   }
 
-  status = ['inprogress', 'Completed', 'contacted the user', 'need to contact customer price', 'approved']
+  status = ['In progress', 'Completed', 'contacted the user', 'need to contact customer price', 'approved']
   onPageChange(event: any) {
     this.p = event
   }
-  saveData(item: any) {
-    console.log(item)
-  }
+
 
 
 
@@ -66,7 +68,6 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
         return item;
       });
       this.spinner.stop();
-      console.log(this.details)
     }
     )
 
@@ -75,6 +76,8 @@ export class OrderItemsComponent implements OnInit, OnDestroy {
     this.spinner.start();
     this.api.postData('http://localhost:8081/api/v1/updateOrderItem', item).subscribe(data => {
       this.spinner.stop();
+      this.toaster.success('Price is updated for item')
+
       this.getAllData()
     })
   }

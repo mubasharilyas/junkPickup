@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
   constructor(public api: ApiService, public http: HttpClient,private router: Router) {
     router.events.subscribe(event => {
       if (event instanceof NavigationEnd && !event.url.includes('order-items/') && !event.url.includes('admin-dashboard')) {
-        this.api.updatePaginationSub({ page: 1 , search: { property:'c.name',value:'Sofa'} })
+        this.api.updatePaginationSub({ page: 1 })
 
       }
     });

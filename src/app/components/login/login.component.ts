@@ -65,7 +65,12 @@ export class LoginComponent implements OnInit {
         console.log(data.body)
         this._loginService.updateAuthStatus(true, data.body.user);
         this.usersData.reset();
-        this.router.navigateByUrl('/admin-dashboard');
+        if (data.body.user.isAdmin) {
+          this.router.navigateByUrl('/admin-dashboard');
+        } else {
+          this.router.navigateByUrl('/trash-upload');
+
+        }
       }
       else if (this.response.infoMessage) {
         this.toastr.info(this.response.infoMessage);
@@ -86,7 +91,7 @@ export class LoginComponent implements OnInit {
   }
 
   forgotPassword() {
-  console.log('forgot')
+    console.log('forgot')
     this.apiService.postData('http://localhost:8081/api/v1/resetPasswordEmail', this.usersData.value).subscribe((response: any) => {
       if (response.errorMessage) {
         this.toastr.error(response.errorMessage)

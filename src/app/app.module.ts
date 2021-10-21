@@ -22,7 +22,7 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
 import { OrderItemsComponent } from './components/order-items/order-items.component';
 
 import { CategoryComponent } from './components/category/category.component';
-import { AuthGuardGuard } from './guards/auth-guard.guard';
+import { AuthGuard } from './guards/auth.guard';
 import { CanActivate } from '@angular/router';
 import { AuthenticationService } from './services/authentication.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -64,7 +64,7 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
     ToastrModule.forRoot() // ToastrModule added
 
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },AuthGuardGuard,AuthenticationService,
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },AuthGuard,AuthenticationService,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

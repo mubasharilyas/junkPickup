@@ -1,12 +1,4 @@
-<!-- <nav class="navigation">
-  <ul>
-    <li><a href="…">Climb Atlas</a></li>
-    <li><a href="…">Featured Climbs</a></li>
-    <li><a  [routerLink]="['/countries']">Explore</a></li>
-    <li><a href="…">Team</a></li>
-    <li><a href="…">Shop</a></li>
-  </ul>
-</nav> -->
+
 
 
 <a (click)="openMenu()" id="main-menu-toggle" class="menu-toggle" aria-label="Open main menu">
@@ -25,14 +17,11 @@
     <div class="flex">
 
         <ul>
-            <li *ngIf="isLoggedIn && user && user.isAdmin" ><a routerLink="/admin-dashboard">Dashboard</a></li>
+            <li *ngIf="isLoggedIn && user && user.isAdmin" ><a routerLink="/admin-dashboard" (click)="closeOnNavigation()">Dashboard</a></li>
 
+            <li *ngIf=" isLoggedIn && user && !user.isAdmin" ><a routerLink="/trash-upload" (click)="closeOnNavigation()" >Create Trash</a></li>
 
-
-
-            <li *ngIf=" isLoggedIn && user && !user.isAdmin" ><a routerLink="/trash-upload" >Create Trash</a></li><br>
-
-            <li><a *ngIf="isLoggedIn && user && user.isAdmin" routerLink="/category">Category</a></li>
+            <li><a *ngIf="isLoggedIn && user && user.isAdmin" routerLink="/category" (click)="closeOnNavigation()">Category</a></li>
 
 
 
@@ -48,23 +37,23 @@
 
 
             <div class="ml-lg-2" *ngIf="isLoggedIn">
-                <button (click)="logout()" class="ml-auto btn signup-btn" >Log out</button>
+                <button (click)="logout()" class="ml-auto btn signup-btn" (click)="closeOnNavigation()" >Log out</button>
 
             </div>
 
 
             <div *ngIf="activePage==='sign-up'&&!isLoggedIn" class="ml-2">
-                <button routerLink="/login" class="ml-auto btn signup-btn">Log In</button>
+                <button routerLink="/login" class="ml-auto btn signup-btn" (click)="closeOnNavigation()">Log In</button>
 
             </div>
 
             <div *ngIf="!isLoggedIn" class="ml-2">
-                <button routerLink="/login" class="ml-auto btn signup-btn" >Log In</button>
+                <button routerLink="/login" class="ml-auto btn signup-btn" (click)="closeOnNavigation()" >Log In</button>
 
             </div>
 
             <div *ngIf="!isLoggedIn" class="ml-2">
-                <button routerLink="/sign-up" class="ml-auto btn signup-btn" style="margin:10px;">Sign up</button>
+                <button routerLink="/sign-up" class="ml-auto btn signup-btn" style="margin:10px;" (click)="closeOnNavigation()">Sign up</button>
 
             </div>
         </div>

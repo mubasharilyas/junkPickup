@@ -36,12 +36,16 @@ export class NavigationComponent implements OnInit {
   public openMenu() {
     this.ClassesToApply = 'menu-target'
   }
-
+  closeOnNavigation() {
+    if (this.ClassesToApply == 'menu-target') {
+      this.ClassesToApply = 'close-menu';
+    }
+  }
   public closeMenue() {
     this.ClassesToApply = 'close-menu'
   }
   getuser() {
-    this.isLogedin = true;
+    this.user = this._loginService.getUserStatus();
 
   }
   logout() {

@@ -121,6 +121,8 @@ export class TrashUploadComponent implements OnInit, AfterViewInit {
         this.toastr.error(data.errorMessage);
 
       } else if (data.success) {
+        this.junkFormDat = { image: "", fileName: '', userId: 0 };
+        this.items = []
         this.toastr.success('Order created successfully');
 
       }

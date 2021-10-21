@@ -30,4 +30,10 @@
     width: 100%;
   }
   
-  
+  ::ng-deep #toast-container > div {
+	  font-size: 80%;
+	  width: 100%;
+	float: right;
+	margin-top: 30%;
+	border-radius: 10px;
+  }
